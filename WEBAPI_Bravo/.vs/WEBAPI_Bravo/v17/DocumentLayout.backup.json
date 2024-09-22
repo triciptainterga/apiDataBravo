@@ -1,0 +1,197 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\WEBAPI_Bravo\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\webapi_bravo\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\webapi_bravo\\controllers\\datakelolacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:controllers\\datakelolacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\webapi_bravo\\model\\bravocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:model\\bravocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\webapi_bravo\\model\\customerchannel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:model\\customerchannel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\webapi_bravo\\model\\msourcetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:model\\msourcetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\webapi_bravo\\model\\trmcustomerchannel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:model\\trmcustomerchannel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\webapi_bravo\\controllers\\btnnomorrekeningscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:controllers\\btnnomorrekeningscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\webapi_bravo\\controllers\\voipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:controllers\\voipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\webapi_bravo\\model\\bracustomertype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:model\\bracustomertype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\webapi_bravo\\controllers\\ticketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:controllers\\ticketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\WEBAPI_Bravo\\Model\\SmlMCustomerChannel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Model\\SmlMCustomerChannel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 9,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MSourceType.cs",
+              "DocumentMoniker": "E:\\WEBAPI_Bravo\\Model\\MSourceType.cs",
+              "RelativeDocumentMoniker": "Model\\MSourceType.cs",
+              "ToolTip": "E:\\WEBAPI_Bravo\\Model\\MSourceType.cs",
+              "RelativeToolTip": "Model\\MSourceType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAcAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T17:40:25.789Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CustomerChannel.cs",
+              "DocumentMoniker": "E:\\WEBAPI_Bravo\\Model\\CustomerChannel.cs",
+              "RelativeDocumentMoniker": "Model\\CustomerChannel.cs",
+              "ToolTip": "E:\\WEBAPI_Bravo\\Model\\CustomerChannel.cs",
+              "RelativeToolTip": "Model\\CustomerChannel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAQAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T17:27:41.43Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TrmCustomerChannel.cs",
+              "DocumentMoniker": "E:\\WEBAPI_Bravo\\Model\\TrmCustomerChannel.cs",
+              "RelativeDocumentMoniker": "Model\\TrmCustomerChannel.cs",
+              "ToolTip": "E:\\WEBAPI_Bravo\\Model\\TrmCustomerChannel.cs",
+              "RelativeToolTip": "Model\\TrmCustomerChannel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAcAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T17:25:16.6Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BtnNomorRekeningsController.cs",
+              "DocumentMoniker": "E:\\WEBAPI_Bravo\\Controllers\\BtnNomorRekeningsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BtnNomorRekeningsController.cs",
+              "ToolTip": "E:\\WEBAPI_Bravo\\Controllers\\BtnNomorRekeningsController.cs",
+              "RelativeToolTip": "Controllers\\BtnNomorRekeningsController.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAIwFAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T17:17:40.867Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BravoContext.cs",
+              "DocumentMoniker": "E:\\WEBAPI_Bravo\\Model\\BravoContext.cs",
+              "RelativeDocumentMoniker": "Model\\BravoContext.cs",
+              "ToolTip": "E:\\WEBAPI_Bravo\\Model\\BravoContext.cs",
+              "RelativeToolTip": "Model\\BravoContext.cs",
+              "ViewState": "AgIAAN6BAAAAAAAAAAAowOqBAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T16:26:07.581Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BraCustomerType.cs",
+              "DocumentMoniker": "E:\\WEBAPI_Bravo\\Model\\BraCustomerType.cs",
+              "RelativeDocumentMoniker": "Model\\BraCustomerType.cs",
+              "ToolTip": "E:\\WEBAPI_Bravo\\Model\\BraCustomerType.cs",
+              "RelativeToolTip": "Model\\BraCustomerType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T16:24:09.885Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DataKelolaController.cs",
+              "DocumentMoniker": "E:\\WEBAPI_Bravo\\Controllers\\DataKelolaController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DataKelolaController.cs",
+              "ToolTip": "E:\\WEBAPI_Bravo\\Controllers\\DataKelolaController.cs",
+              "RelativeToolTip": "Controllers\\DataKelolaController.cs",
+              "ViewState": "AgIAAL4BAAAAAAAAAAAswMIBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T16:12:57.865Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "VoipController.cs",
+              "DocumentMoniker": "E:\\WEBAPI_Bravo\\Controllers\\VoipController.cs",
+              "RelativeDocumentMoniker": "Controllers\\VoipController.cs",
+              "ToolTip": "E:\\WEBAPI_Bravo\\Controllers\\VoipController.cs",
+              "RelativeToolTip": "Controllers\\VoipController.cs",
+              "ViewState": "AgIAALYAAAAAAAAAAAASwMEAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T16:35:37.748Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TicketController.cs",
+              "DocumentMoniker": "E:\\WEBAPI_Bravo\\Controllers\\TicketController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TicketController.cs",
+              "ToolTip": "E:\\WEBAPI_Bravo\\Controllers\\TicketController.cs",
+              "RelativeToolTip": "Controllers\\TicketController.cs",
+              "ViewState": "AgIAAPUAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T16:13:25.925Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "E:\\WEBAPI_Bravo\\Startup.cs",
+              "RelativeDocumentMoniker": "Startup.cs",
+              "ToolTip": "E:\\WEBAPI_Bravo\\Startup.cs",
+              "RelativeToolTip": "Startup.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAIwEcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T16:12:40.676Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SmlMCustomerChannel.cs",
+              "DocumentMoniker": "E:\\WEBAPI_Bravo\\Model\\SmlMCustomerChannel.cs",
+              "RelativeDocumentMoniker": "Model\\SmlMCustomerChannel.cs",
+              "ToolTip": "E:\\WEBAPI_Bravo\\Model\\SmlMCustomerChannel.cs",
+              "RelativeToolTip": "Model\\SmlMCustomerChannel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T18:28:53.682Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
