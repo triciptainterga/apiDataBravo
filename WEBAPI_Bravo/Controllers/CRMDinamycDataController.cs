@@ -103,18 +103,18 @@ namespace WEBAPI_Bravo.Controllers
 
         //    return Ok(datasElement);
         //}
-        [HttpGet("GetDataAccountAll")]
-        public async Task<IActionResult> GetDataAccountAll(int year)
-        {
-            var Accounts = await _externalApiService.GetAccountAsync(year);
+        //[HttpGet("GetDataAccountAll")]
+        //public async Task<IActionResult> GetDataAccountAll(int year)
+        //{
+        //    var Accounts = await _externalApiService.GetAccountAsync(year);
 
-            JsonDocument jsonDoc = JsonDocument.Parse(Accounts);
-            JsonElement root = jsonDoc.RootElement;
-           JsonElement datasElement = root.GetProperty("Datas");  
+        //    JsonDocument jsonDoc = JsonDocument.Parse(Accounts);
+        //    JsonElement root = jsonDoc.RootElement;
+        //   JsonElement datasElement = root.GetProperty("Datas");  
             
 
-            return Ok(datasElement);
-        }
+        //    return Ok(datasElement);
+        //}
 
 
         //[HttpGet("GetDataAccountByTop")]
@@ -184,43 +184,43 @@ namespace WEBAPI_Bravo.Controllers
         //    return Ok(datasElement);
         //}
 
-        [HttpPost("PostDataContact")]
-        public async Task<IActionResult> PostDataContact(contact Data)
-        {
-            var Accounts = await _externalApiService.PostContactAsync(Data);
+       //[HttpPost("PostDataContact")]
+       // public async Task<IActionResult> PostDataContact(contact Data)
+       // {
+       //     var Accounts = await _externalApiService.PostContactAsync(Data);
+
+            
+
+
+ 
+
+       //     return Ok(JsonDocument.Parse(Accounts));
+       // }
+
+        //[HttpPost("PostDataAccount")]
+        //public async Task<IActionResult> PostDataAccount(account Data)
+        //{
+        //    var Accounts = await _externalApiService.PostAccountAsync(Data);
 
             
 
 
 
 
-            return Ok(JsonDocument.Parse(Accounts));
-        }
-
-        [HttpPost("PostDataAccount")]
-        public async Task<IActionResult> PostDataAccount(account Data)
-        {
-            var Accounts = await _externalApiService.PostAccountAsync(Data);
-
-            
-
-
-
-
-            return Ok(JsonDocument.Parse(Accounts));
-        }
-        [HttpPost("PostDataCase")]
-        public async Task<IActionResult> PostDataCase(caseData Data)
-        {
-            var Accounts = await _externalApiService.PostCaseAsync(Data);
+        //    return Ok(JsonDocument.Parse(Accounts));
+        //}
+        //[HttpPost("PostDataCase")]
+        //public async Task<IActionResult> PostDataCase(caseData Data)
+        //{
+        //    var Accounts = await _externalApiService.PostCaseAsync(Data);
 
             
 
 
 
 
-            return Ok(JsonDocument.Parse(Accounts));
-        }
+        //    return Ok(JsonDocument.Parse(Accounts));
+        //}
 
 
     }

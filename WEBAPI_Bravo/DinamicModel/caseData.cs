@@ -12,8 +12,8 @@ namespace WEBAPI_Bravo.DinamicModel
     public string NamaSubCategory { get; set; }
     public Guid AccountId { get; set; }
     public Guid ContactId { get; set; }
-    public int Origin { get; set; }
-    public int Priority { get; set; }
+    public string Origin { get; set; }
+    public string Priority { get; set; }
     public string Judul { get; set; }
     public string NoTicket { get; set; }
     }

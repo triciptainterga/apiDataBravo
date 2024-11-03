@@ -24,8 +24,8 @@ namespace WebApiBravo.Models
         public string SubCategory1Name { get; set; }
         public string SubCategory2Id { get; set; }
         public string SubCategory2Name { get; set; }
-        public string SubCategory21id { get; set; }
-        public string SubCategory21name { get; set; }
+        public string SubCategory21ID { get; set; }
+        public string SubCategory21Name { get; set; }
         public string SubCategory3Id { get; set; }
         public string SubCategory3Name { get; set; }
         public string DetailComplaint { get; set; }

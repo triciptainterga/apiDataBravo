@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\BtnNomorRekeningsController.cs" />
+    <Compile Remove="Controllers\WeatherForecastController.cs" />
     <Compile Remove="Model\SmlMCustomerChannel.cs" />
   </ItemGroup>
 

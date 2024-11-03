@@ -22,11 +22,11 @@ namespace WEBAPI_Bravo.Controllers
 
         // GET: api/MCustomers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MCustomer>>> GetMCustomersFilter(string dataInput)
+        public async Task<ActionResult<IEnumerable<MCustomer>>> GetMCustomers()
         {
             try
             {
-                var customers = await _context.MCustomers.Where( x => x.Hp == dataInput || x.Email == dataInput ).ToListAsync();
+                var customers = await _context.MCustomers.Take(100).ToListAsync();
                 return Ok(customers); // Return 200 OK with the list of customers
             }
             catch (Exception ex)
@@ -39,94 +39,94 @@ namespace WEBAPI_Bravo.Controllers
         }
 
         // GET: api/MCustomers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<MCustomer>> GetMCustomer(string id)
-        {
-            var mCustomer = await _context.MCustomers.FindAsync(id);
+    //    [HttpGet("{id}")]
+    //    public async Task<ActionResult<MCustomer>> GetMCustomer(string id)
+    //    {
+    //        var mCustomer = await _context.MCustomers.FindAsync(id);
 
-            if (mCustomer == null)
-            {
-                return NotFound();
-            }
+    //        if (mCustomer == null)
+    //        {
+    //            return NotFound();
+    //        }
 
-            return mCustomer;
-        }
+    //        return mCustomer;
+    //    }
 
-        // PUT: api/MCustomers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutMCustomer(string id, MCustomer mCustomer)
-        {
-            if (id != mCustomer.CustomerId)
-            {
-                return BadRequest();
-            }
+    //    // PUT: api/MCustomers/5
+    //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    //    [HttpPut("{id}")]
+    //    public async Task<IActionResult> PutMCustomer(string id, MCustomer mCustomer)
+    //    {
+    //        if (id != mCustomer.CustomerId)
+    //        {
+    //            return BadRequest();
+    //        }
 
-            _context.Entry(mCustomer).State = EntityState.Modified;
+    //        _context.Entry(mCustomer).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MCustomerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+    //        try
+    //        {
+    //            await _context.SaveChangesAsync();
+    //        }
+    //        catch (DbUpdateConcurrencyException)
+    //        {
+    //            if (!MCustomerExists(id))
+    //            {
+    //                return NotFound();
+    //            }
+    //            else
+    //            {
+    //                throw;
+    //            }
+    //        }
 
-            return NoContent();
-        }
+    //        return NoContent();
+    //    }
 
-        // POST: api/MCustomers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<MCustomer>> PostMCustomer(MCustomer mCustomer)
-        {
-            _context.MCustomers.Add(mCustomer);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (MCustomerExists(mCustomer.CustomerId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+    //    // POST: api/MCustomers
+    //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    //    [HttpPost]
+    //    public async Task<ActionResult<MCustomer>> PostMCustomer(MCustomer mCustomer)
+    //    {
+    //        _context.MCustomers.Add(mCustomer);
+    //        try
+    //        {
+    //            await _context.SaveChangesAsync();
+    //        }
+    //        catch (DbUpdateException)
+    //        {
+    //            if (MCustomerExists(mCustomer.CustomerId))
+    //            {
+    //                return Conflict();
+    //            }
+    //            else
+    //            {
+    //                throw;
+    //            }
+    //        }
 
-            return CreatedAtAction("GetMCustomer", new { id = mCustomer.CustomerId }, mCustomer);
-        }
+    //        return CreatedAtAction("GetMCustomer", new { id = mCustomer.CustomerId }, mCustomer);
+    //    }
 
-        // DELETE: api/MCustomers/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMCustomer(string id)
-        {
-            var mCustomer = await _context.MCustomers.FindAsync(id);
-            if (mCustomer == null)
-            {
-                return NotFound();
-            }
+    //    // DELETE: api/MCustomers/5
+    //    [HttpDelete("{id}")]
+    //    public async Task<IActionResult> DeleteMCustomer(string id)
+    //    {
+    //        var mCustomer = await _context.MCustomers.FindAsync(id);
+    //        if (mCustomer == null)
+    //        {
+    //            return NotFound();
+    //        }
 
-            _context.MCustomers.Remove(mCustomer);
-            await _context.SaveChangesAsync();
+    //        _context.MCustomers.Remove(mCustomer);
+    //        await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+    //        return NoContent();
+    //    }
 
-        private bool MCustomerExists(string id)
-        {
-            return _context.MCustomers.Any(e => e.CustomerId == id);
-        }
-    }
+    //    private bool MCustomerExists(string id)
+    //    {
+    //        return _context.MCustomers.Any(e => e.CustomerId == id);
+    //    }
+   }
 }

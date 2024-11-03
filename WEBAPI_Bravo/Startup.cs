@@ -25,20 +25,29 @@ namespace WEBAPI_Bravo
         }
 
         public IConfiguration Configuration { get; }
+        private readonly ISCHService _SCHService;
         public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddDbContext<BravoContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-     
 
-          
+
+            var HangfireConnection = Configuration.GetConnectionString("HangfireConnection");
+
+           
+            services.AddScoped<ISCHService, SCHService>();
+
+
+
+
+
             services.AddControllers();
             services.AddHttpClient<ExternalApiService>();
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API Bravo data kelola", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API Bravo ", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); //This line
             });
         }
@@ -53,17 +62,23 @@ namespace WEBAPI_Bravo
 
             app.UseEndpoints(endpoints =>
             {
+                
                 endpoints.MapControllers();
+
+               
+                // Schedule the job
+              
             });
 
             // Enable Swagger
             app.UseSwagger();
 
+
             // Enable Swagger UI
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                //c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+              // c.SwaggerEndpoint("/ApiScheduler/swagger/v1/swagger.json", "My API V1");
+              c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
         }
     }

@@ -61,6 +61,8 @@ namespace WebApiBravo.Models
         public string BillingKota { get; set; }
         public string BillingProvinsi { get; set; }
         public string AutoGenerateId { get; set; }
+        public string NPWP { get; set; }
+  
         public string ContactDynamicId { get; set; }
     }
 }

@@ -224,6 +224,8 @@ namespace WEBAPI_Bravo.Controllers
         {
 
 
+            public string AccountId { get; set; }
+            public string ContactId { get; set; }
             public string TicketNumber { get; set; }
             public string GenesysNumber { get; set; }
             public string ThreadID { get; set; }

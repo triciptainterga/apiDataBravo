@@ -554,6 +554,7 @@ namespace WebApiBravo.Models
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<CustomerChannel> CustomerChannels { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -7060,6 +7061,15 @@ namespace WebApiBravo.Models
                 entity.Property(e => e.UserUpdate)
                     .HasMaxLength(500)
                     .IsUnicode(false);
+
+                entity.Property(e => e.NPWP)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+                entity.Property(e => e.ContactDynamicId)
+                  .HasMaxLength(100)
+                  .IsUnicode(false);
+               
             });
 
             modelBuilder.Entity<MGroupType>(entity =>
@@ -14257,19 +14267,19 @@ namespace WebApiBravo.Models
                     .IsUnicode(false)
                     .HasColumnName("SubCategory1ID");
 
-                entity.Property(e => e.SubCategory1Name)
+                entity.Property(e => e.SubCategory21ID)
                     .IsRequired()
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
-                entity.Property(e => e.SubCategory21id)
+                entity.Property(e => e.SubCategory21ID)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("SubCategory2_1ID")
                     .HasDefaultValueSql("((0))");
 
-                entity.Property(e => e.SubCategory21name)
+                entity.Property(e => e.SubCategory1Name)
                     .IsRequired()
                     .HasMaxLength(250)
                     .IsUnicode(false)
@@ -17865,7 +17875,7 @@ namespace WebApiBravo.Models
             {
                 entity.HasNoKey();
 
-                entity.ToView("TrmCategory");
+                entity.ToView("mCategory");
 
                 entity.Property(e => e.CategoryId)
                     .HasMaxLength(10)
@@ -33222,37 +33232,37 @@ namespace WebApiBravo.Models
                     .IsRequired();
 
                 entity.Property(e => e.AccountID)
-                    .IsRequired()
+                   // .IsRequired()
                     .HasMaxLength(255);
 
                 entity.Property(e => e.PerusahaanID)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasMaxLength(255);
 
                 entity.Property(e => e.Nama_Perusahaan)
-                    .IsRequired()
+                   // .IsRequired()
                     .HasMaxLength(255);
 
                 entity.Property(e => e.NPWP)
-                    .IsRequired()
+                   // .IsRequired()
                     .HasMaxLength(50);
 
                 entity.Property(e => e.NomorTelepon)
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Email)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasMaxLength(255);
 
                 entity.Property(e => e.Type)
                     .HasMaxLength(50);
 
                 entity.Property(e => e.CreatedBy)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasMaxLength(255);
 
                 entity.Property(e => e.CreatedDate)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasColumnType("datetime");
             });
 

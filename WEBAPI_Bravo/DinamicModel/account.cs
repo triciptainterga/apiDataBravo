@@ -19,7 +19,7 @@ namespace WEBAPI_Bravo.DinamicModel
         public string AccountName { get; set; }
         public string MainPhone { get; set; }
         public string NPWP { get; set; }
-        public Guid ContactId { get; set; }
+      
 
 
 

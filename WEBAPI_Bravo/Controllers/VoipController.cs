@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,9 +8,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using WEBAPI_Bravo.DinamicModel;
 using WEBAPI_Bravo.Model;
 using WebApiBravo.Models;
-using static WEBAPI_Bravo.Controllers.TicketControllerController;
+
 
 namespace WEBAPI_Bravo.Controllers
 {
@@ -60,115 +62,7 @@ namespace WEBAPI_Bravo.Controllers
         }
 
 
-        //[HttpGet("GetDataBraNamaPerusahaanVoip")]
-        //public async Task<ActionResult<IEnumerable<BraNamaPerusahaan>>> GetDataBraNamaPerusahaan(string InputData)
-        //{
-        //    try
-        //    {
-        //        var customers = await _context.BraNamaPerusahaans
-        //      .Where(x => x.Nama_Perusahaan.Contains(InputData) || x.NomorTelepon.Contains(InputData) )
-        //      .ToListAsync();
-        //        return Ok(customers);
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-
-        //        return StatusCode(500, "Internal server error"); // Return 500 Internal Server Error
-        //    }
-
-
-
-
-        //}
-        //[HttpPost("createTicketDataVoip")]
-        //public async Task<IActionResult> createTicketDataVoip([FromBody] TicketVoip request)
-
-        //{
-        //    var listTickets = new List<TicketVoip>();
-        //    string strTime = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-        //    string strGenesysNumber, strThreadID, strAccount, strChannel;
-
-        //    if (request.GenesysNumber == "0")
-        //    {
-        //        strThreadID = strTime + new Random().Next(1000000, 9999999);
-        //        strGenesysNumber = strTime + new Random().Next(100000000, 999999999);
-        //        strAccount = request.Account;
-        //        strChannel = request.Channel;
-        //    }
-        //    else
-        //    {
-        //        strGenesysNumber = request.GenesysNumber;
-        //        strThreadID = request.ThreadID;
-        //        strAccount = request.Account;
-        //        strChannel = request.Channel;
-        //    }
-
-        //    try
-        //    {
-        //        var result = await _context.Database.ExecuteSqlRawAsync(
-        //            "EXEC BRA_CreateTicket_DK @TicketNumber, @GenesysNumber, @ThreadID, @Account, @Channel, @CustomerID, @UserName, @Priority, @Status, @Subject, @Kategori, @SubKategori, @NoAju, @NilaiTransaksi, @Kantor, @Pertanyaan, @Jawaban, @Posisi,@NamaPerusahaan, @EmailPerusahaan,@TeleponPerusahaan,@NPWPPerusahaan , @Action",
-        //            new SqlParameter("@TicketNumber", strTime),
-        //            new SqlParameter("@GenesysNumber", strGenesysNumber),
-        //            new SqlParameter("@ThreadID", strThreadID),
-        //            new SqlParameter("@Account", strAccount),
-        //            new SqlParameter("@Channel", strChannel),
-        //            new SqlParameter("@CustomerID", request.CustomerID),
-        //            new SqlParameter("@UserName", request.UserName),
-        //            new SqlParameter("@Priority", request.Priority),
-        //            new SqlParameter("@Status", request.Status),
-        //            new SqlParameter("@Subject", request.Subject),
-        //            new SqlParameter("@Kategori", request.Kategori),
-        //            new SqlParameter("@SubKategori", request.SubKategori),
-        //            new SqlParameter("@NoAju", request.NoAju),
-        //            new SqlParameter("@NilaiTransaksi", request.NilaiTransaksi),
-        //            new SqlParameter("@Kantor", request.Kantor),
-        //            new SqlParameter("@Pertanyaan", Uri.EscapeDataString(request.Pertanyaan)),
-        //            new SqlParameter("@Jawaban", Uri.EscapeDataString(request.Jawaban)),
-        //            new SqlParameter("@Posisi", request.Posisi),
-        //            new SqlParameter("@NamaPerusahaan", request.NamaPerusahaan),
-        //            new SqlParameter("@EmailPerusahaan", request.EmailPerusahaan),
-        //            new SqlParameter("@TeleponPerusahaan", request.TeleponPerusahaan),
-        //            new SqlParameter("@NPWPPerusahaan", request.NPWPPerusahaan),
-        //            new SqlParameter("@PolisNumber", request.PolisNumber),
-        //            new SqlParameter("@Action", request.Action)
-        //        );
-
-        //        var ticket = new TicketVoip
-        //        {
-        //            TicketNumber = strTime,
-        //            GenesysNumber = strGenesysNumber,
-        //            ThreadID = strThreadID,
-        //            Account = strAccount,
-        //            Channel = strChannel,
-        //            CustomerID = request.CustomerID,
-        //            UserName = request.UserName,
-        //            Priority = request.Priority,
-        //            Status = request.Status,
-        //            Subject = request.Subject,
-        //            Kategori = request.Kategori,
-        //            SubKategori = request.SubKategori,
-        //            NoAju = request.NoAju,
-        //            NilaiTransaksi = request.NilaiTransaksi,
-        //            Kantor = request.Kantor,
-        //            Pertanyaan = Uri.EscapeDataString(request.Pertanyaan),
-        //            Jawaban = Uri.EscapeDataString(request.Jawaban),
-        //            Posisi = request.Posisi,
-        //            Action = request.Action
-        //        };
-
-        //        listTickets.Add(ticket);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(400, ex.ToString());
-
-        //    }
-
-
-        //    //var js = new JavaScriptSerializer();
-        //    return StatusCode(201, listTickets);
-        //}
+       
 
         [HttpPost("PostCustomerVoip")]
         public async Task<ActionResult> PostCustomerVoip([FromBody] PostDataCustomerVoip contact)
@@ -176,7 +70,7 @@ namespace WEBAPI_Bravo.Controllers
             var contactIdParam = new SqlParameter("@ContactId", contact.ContactId);
             var nameParam = new SqlParameter("@Name", contact.Name);
             var phoneParam = new SqlParameter("@BusinessPhone", contact.NomorTelpon);
-            var addressParam = new SqlParameter("@Email", contact.Email); 
+            var addressParam = new SqlParameter("@Email", contact.Email);
             var polisParam = new SqlParameter("@Extension", contact.Extension);
             var Type = new SqlParameter("@Type", contact.Type);
 
@@ -185,7 +79,7 @@ namespace WEBAPI_Bravo.Controllers
             {
                 await _context.Database.ExecuteSqlRawAsync(
                     "EXEC BRA_InsertContactMobile @ContactId, @Name, @BusinessPhone,@Email,@Extension,@Type",
-                    contactIdParam, nameParam, phoneParam, addressParam,polisParam, Type);
+                    contactIdParam, nameParam, phoneParam, addressParam, polisParam, Type);
             }
             catch (DbUpdateException ex)
             {
@@ -195,6 +89,138 @@ namespace WEBAPI_Bravo.Controllers
 
             return CreatedAtAction(nameof(PostCustomerVoip), new { id = contact.ContactId }, contact);
         }
+      
+        [HttpGet("GetDataWbByCount")]
+        public async Task<List<datas>> GetDataWbByCount(string type)
+        {
+            var users = new List<datas>();
+
+            try
+            {
+                using (var connection = _context.Database.GetDbConnection())
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = "EXEC WalboardBravo2 @Type"; // Use parameter directly in command text
+                        command.CommandType = CommandType.Text;
+                        var typeParameter = new SqlParameter("@Type", type);
+                        command.Parameters.Add(typeParameter);
+
+                        using (var result = await command.ExecuteReaderAsync())
+                        {
+                            while (await result.ReadAsync())
+                            {
+                                users.Add(new datas
+                                {
+                                    Jenis = result.GetString(0),
+                                    Jumlah = result.GetDouble(1)
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                // Handle SQL exceptions (e.g., log the error)
+                Console.WriteLine($"SQL error: {sqlEx.Message}");
+                // Optionally, you could throw the exception or return an empty list
+                // throw; // Uncomment this if you want to propagate the exception
+            }
+            catch (Exception ex)
+            {
+                // Handle general exceptions (e.g., log the error)
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                // Optionally, you could throw the exception or return an empty list
+                // throw; // Uncomment this if you want to propagate the exception
+            }
+
+            return users;
+        }
+
+        [HttpGet("GetDataWbByList")]
+        public async Task<List<datas2>> GetDataWbByList(string type)
+        {
+            var users = new List<datas2>();
+
+            try
+            {
+                using (var connection = _context.Database.GetDbConnection())
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = "EXEC WalboardBravo2 @Type"; // Use parameter directly in command text
+                        command.CommandType = CommandType.Text;
+                        var typeParameter = new SqlParameter("@Type", type);
+                        command.Parameters.Add(typeParameter);
+
+                        using (var result = await command.ExecuteReaderAsync())
+                        {
+                            while (await result.ReadAsync())
+                            {
+                                users.Add(new datas2
+                                {
+                                    Jenis = result.GetString(0),
+                                    Jumlah = result.GetInt32(1)
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                // Handle SQL exceptions (e.g., log the error)
+                Console.WriteLine($"SQL error: {sqlEx.Message}");
+                // Optionally, you could throw the exception or return an empty list
+                // throw; // Uncomment this if you want to propagate the exception
+            }
+            catch (Exception ex)
+            {
+                // Handle general exceptions (e.g., log the error)
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                // Optionally, you could throw the exception or return an empty list
+                // throw; // Uncomment this if you want to propagate the exception
+            }
+
+            return users;
+        }
+        //public async Task<ActionResult<List<datas>>> GetDataWb(string type)
+        //{
+        //    var typeParam = new SqlParameter("@Type", type);
+
+        //    List<datas> data;
+
+        //    // Call the stored procedure
+        //    try
+        //    {
+        //        data = await _context.Set<datas>()
+        //            .FromSqlRaw("EXEC WalboardBravo2 @Type", typeParam)
+        //            .ToListAsync();
+        //    }
+        //    catch (Exception ex) // Catch more general exceptions
+        //    {
+        //        // Log the exception here (consider using a logging framework)
+        //        // For example: _logger.LogError(ex, "Error retrieving data from stored procedure");
+        //        return StatusCode(500, ex.ToString());
+        //    }
+
+        //    return Ok(data); // Return 200 OK with the data
+        //}
+    }
+    public class datas
+    {
+        public string Jenis { get; set; }
+        public double Jumlah { get; set; }
+    }
+    public class datas2
+    {
+        public string Jenis { get; set; }
+        public int Jumlah { get; set; }
     }
 }
 
@@ -207,7 +233,7 @@ public partial class PostDataCustomerVoip
     public string Name { get; set; }
     public string NomorTelpon { get; set; }
     public string Email { get; set; }
-    public string Extension { get; set; } 
+    public string Extension { get; set; }
     public string Type { get; set; }
 }
 
