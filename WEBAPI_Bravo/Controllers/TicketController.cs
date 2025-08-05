@@ -4,6 +4,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -68,27 +69,91 @@ namespace WEBAPI_Bravo.Controllers
 
         }
 
+        //[HttpGet("GetDataKantor")]
+        //public async Task<ActionResult<BraNamaKantor>> GetDataKantor(string searchText)
+        //{
+
+        //    // SELECT* FROM BRA_Nama_Kantor WHERE(NamaKantor LIKE '%' + @TrxID + '%' OR EMAIL LIKE '%' + @TrxID + '%' OR Telepon LIKE '%' + @TrxID + '%') ORDER BY NamaKantor ASC
+
+        //    var likeSearch = $"%{searchText}%";
+
+
+        //    var result = await _context.BraNamaKantors
+        //         .Where(x => EF.Functions.Like(x.NamaKantor, likeSearch) || EF.Functions.Like(x.Email, likeSearch) || EF.Functions.Like(x.Telepon, likeSearch))
+        //         .OrderByDescending(x => x.NamaKantor)
+        //         .ToListAsync();
+        //    //var prioritizedIds = new List<int> { 148, 295, 187 };
+
+        //    //var result = await _context.BraNamaKantors
+        //    //    .Where(x => EF.Functions.Like(x.NamaKantor, likeSearch) ||
+        //    //                EF.Functions.Like(x.Email, likeSearch) ||
+        //    //                EF.Functions.Like(x.Telepon, likeSearch))
+        //    //    .OrderBy(x => prioritizedIds.Contains(x.Id) ? prioritizedIds.IndexOf(x.Id) : int.MaxValue)
+        //    //    .ThenByDescending(x => x.NamaKantor)
+        //    //    .ToListAsync();
+
+
+        //    if (result == null)
+        //    {
+        //        return StatusCode(400, NotFound());
+        //    }
+        //    return StatusCode(201, result);
+
+        //}
+
         [HttpGet("GetDataKantor")]
-        public async Task<ActionResult<BraNamaKantor>> GetDataKantor(string searchText)
+        public async Task<ActionResult<List<BraNamaKantor>>> GetDataKantor(string searchText)
         {
+            var users = new List<BraNamaKantor>();
 
-            // SELECT* FROM BRA_Nama_Kantor WHERE(NamaKantor LIKE '%' + @TrxID + '%' OR EMAIL LIKE '%' + @TrxID + '%' OR Telepon LIKE '%' + @TrxID + '%') ORDER BY NamaKantor ASC
-
-            var likeSearch = $"%{searchText}%";
-
-            
-            var result = await _context.BraNamaKantors
-                 .Where(x => EF.Functions.Like(x.NamaKantor, likeSearch) || EF.Functions.Like(x.Email, likeSearch) ||EF.Functions.Like(x.Telepon, likeSearch))
-                 .OrderByDescending(x => x.NamaKantor)
-                 .ToListAsync();
-
-            if (result == null)
+            try
             {
-                return StatusCode(400, NotFound());
-            }
-            return StatusCode(201, result);
+                using (var connection = _context.Database.GetDbConnection())
+                {
+                    await connection.OpenAsync();
 
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = "EXEC SearchBraNamaKantor @LikeSearch";
+                        command.CommandType = CommandType.Text;
+
+                        var typeParameter = new SqlParameter("@LikeSearch", $"%{searchText}%"); // Gunakan wildcard jika perlu
+                        command.Parameters.Add(typeParameter);
+
+                        using (var result = await command.ExecuteReaderAsync())
+                        {
+                            while (await result.ReadAsync())
+                            {
+                                users.Add(new BraNamaKantor
+                                {
+                                    Id = result.GetInt32(0), // Sesuaikan tipe data
+                                    NamaKantor = result.GetString(1),
+                                    Telepon = result.IsDBNull(2) ? null : result.GetString(2),
+                                    Email = result.IsDBNull(3) ? null : result.GetString(3),
+                                    CreatedBy = result.IsDBNull(4) ? null : result.GetString(4),
+                                    CreatedDate = result.IsDBNull(5) ? DateTime.MinValue : result.GetDateTime(5),
+                                    Alamat = result.IsDBNull(6) ? null : result.GetString(6),
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"SQL error: {sqlEx.Message}");
+                return StatusCode(500, "Database error occurred.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return StatusCode(500, "An error occurred while processing the request.");
+            }
+
+            return users;
         }
+
+
 
         [HttpPost("uploadFile")]
         public async Task<IActionResult> UploadFile(List<IFormFile> files)
@@ -248,6 +313,7 @@ namespace WEBAPI_Bravo.Controllers
             public string EmailPerusahaan { get; set; }
             public string TeleponPerusahaan { get; set; }
             public string NPWPPerusahaan { get; set; }
+            public DateTime DateCreate { get; set; }
             public string Action { get; set; }
         }
     }

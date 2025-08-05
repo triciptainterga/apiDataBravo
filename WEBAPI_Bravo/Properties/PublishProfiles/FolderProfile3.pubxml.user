@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\publish\ApiBravo</_PublishTargetUrl>
+    <History>True|2024-12-05T15:57:29.3285843Z||;True|2024-12-05T10:44:00.0538603+07:00||;True|2024-12-05T10:41:46.0402305+07:00||;True|2024-12-05T09:22:51.4916888+07:00||;True|2024-12-05T01:05:03.2071185+07:00||;True|2024-11-26T00:33:33.5622424+07:00||;True|2024-11-26T00:00:57.9556393+07:00||;True|2024-11-25T19:38:02.2671149+07:00||;True|2024-11-25T19:24:07.5379760+07:00||;True|2024-11-14T01:46:44.2313719+07:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

@@ -32,15 +32,12 @@ namespace WEBAPI_Bravo
             services.AddDbContext<BravoContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-
-            var HangfireConnection = Configuration.GetConnectionString("HangfireConnection");
-
-           
-            services.AddScoped<ISCHService, SCHService>();
+            services.AddSingleton<IServiceScopeFactory>(sp => sp.GetRequiredService<IServiceScopeFactory>());
 
 
 
 
+            //var HangfireConnection = Configuration.GetConnectionString("HangfireConnection");
 
             services.AddControllers();
             services.AddHttpClient<ExternalApiService>();
@@ -51,6 +48,29 @@ namespace WEBAPI_Bravo
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); //This line
             });
         }
+
+        //public void ConfigureServices(IServiceCollection services)
+        //{
+        //    services.AddDbContext<BravoContext>(options =>
+        //        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+        //    services.AddSingleton<IServiceScopeFactory>(sp => sp.GetRequiredService<IServiceScopeFactory>());
+
+        //    services.AddControllers()
+        //        .AddJsonOptions(options =>
+        //        {
+        //            options.JsonSerializerOptions.Converters.Add(new CustomDateTimeConverter());
+        //        });
+
+        //    services.AddHttpClient<ExternalApiService>();
+
+        //    services.AddSwaggerGen(c =>
+        //    {
+        //        c.SwaggerDoc("v1", new OpenApiInfo { Title = "API Bravo ", Version = "v1" });
+        //        c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+        //    });
+        //}
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -77,11 +97,12 @@ namespace WEBAPI_Bravo
             // Enable Swagger UI
             app.UseSwaggerUI(c =>
             {
-              // c.SwaggerEndpoint("/ApiScheduler/swagger/v1/swagger.json", "My API V1");
-              c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+               // c.SwaggerEndpoint("/ApiDuplicateBravo/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
         }
     }
 
 
 }
+

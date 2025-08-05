@@ -1,14 +1,53 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "F:\\WEBAPI_Bravo\\",
+  "WorkspaceRootPath": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|f:\\webapi_bravo\\controllers\\voipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\api2025\\apidatabravo\\webapi_bravo\\controllers\\wallboadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:controllers\\wallboadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\AppData\\Local\\SourceServer\\5c0f2db467fe671fecd7a648234049313fddba0e9b44c88cfe5c69dffbed697a\\WEBAPI_Bravo\\Controllers\\WallboadController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\api2025\\apidatabravo\\webapi_bravo\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\api2025\\apidatabravo\\webapi_bravo\\controllers\\datafromdkcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:controllers\\datafromdkcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\api2025\\apidatabravo\\webapi_bravo\\controllers\\voipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:controllers\\voipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|f:\\webapi_bravo\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\api2025\\apidatabravo\\webapi_bravo\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\api2025\\apidatabravo\\webapi_bravo\\controllers\\schedulercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:controllers\\schedulercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\api2025\\apidatabravo\\webapi_bravo\\controllers\\digitalperformancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:controllers\\digitalperformancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\api2025\\apidatabravo\\webapi_bravo\\controllers\\ticketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:controllers\\ticketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\api2025\\apidatabravo\\webapi_bravo\\model\\bravocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:model\\bravocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\api2025\\apidatabravo\\webapi_bravo\\dinamicmodel\\casedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:dinamicmodel\\casedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|e:\\api2025\\apidatabravo\\webapi_bravo\\controllers\\contactcenterreportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C9C6276-F164-49FA-B6D0-5F1CF958FE80}|WEBAPI_Bravo.csproj|solutionrelative:controllers\\contactcenterreportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +57,150 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Startup.cs",
-              "DocumentMoniker": "F:\\WEBAPI_Bravo\\Startup.cs",
-              "RelativeDocumentMoniker": "Startup.cs",
-              "ToolTip": "F:\\WEBAPI_Bravo\\Startup.cs",
-              "RelativeToolTip": "Startup.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAIwEEAAAAPAAAAAAAAAA==",
+              "Title": "WallboadController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\AppData\\Local\\SourceServer\\5c0f2db467fe671fecd7a648234049313fddba0e9b44c88cfe5c69dffbed697a\\WEBAPI_Bravo\\Controllers\\WallboadController.cs",
+              "ToolTip": "C:\\Users\\User\\AppData\\Local\\SourceServer\\5c0f2db467fe671fecd7a648234049313fddba0e9b44c88cfe5c69dffbed697a\\WEBAPI_Bravo\\Controllers\\WallboadController.cs",
+              "ViewState": "AgIAAEkBAAAAAAAAAAAAwEwBAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T04:57:09.321Z"
+              "WhenOpened": "2025-04-24T23:16:24.533Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TicketController.cs",
+              "DocumentMoniker": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\TicketController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TicketController.cs",
+              "ToolTip": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\TicketController.cs",
+              "RelativeToolTip": "Controllers\\TicketController.cs",
+              "ViewState": "AgIAAA8BAAAAAAAAAAAQwB8BAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T16:59:04.166Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Startup.cs",
+              "RelativeDocumentMoniker": "Startup.cs",
+              "ToolTip": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Startup.cs",
+              "RelativeToolTip": "Startup.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAAAEYAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T15:50:23.189Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "BravoContext.cs",
+              "DocumentMoniker": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Model\\BravoContext.cs",
+              "RelativeDocumentMoniker": "Model\\BravoContext.cs",
+              "ToolTip": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Model\\BravoContext.cs",
+              "RelativeToolTip": "Model\\BravoContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA8AAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T15:48:50.565Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SchedulerController.cs",
+              "DocumentMoniker": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\SchedulerController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SchedulerController.cs",
+              "ToolTip": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\SchedulerController.cs",
+              "RelativeToolTip": "Controllers\\SchedulerController.cs",
+              "ViewState": "AgIAAAwBAAAAAAAAAAAEwAkBAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-25T12:02:06.115Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DataFromDKController.cs",
+              "DocumentMoniker": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\DataFromDKController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DataFromDKController.cs",
+              "ToolTip": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\DataFromDKController.cs",
+              "RelativeToolTip": "Controllers\\DataFromDKController.cs",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAgwI8AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-09T15:00:25.835Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DigitalPerformanceController.cs",
+              "DocumentMoniker": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\DigitalPerformanceController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DigitalPerformanceController.cs",
+              "ToolTip": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\DigitalPerformanceController.cs",
+              "RelativeToolTip": "Controllers\\DigitalPerformanceController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAcwCQAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-29T08:24:56.47Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ContactCenterReportController.cs",
+              "DocumentMoniker": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\ContactCenterReportController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ContactCenterReportController.cs",
+              "ToolTip": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\ContactCenterReportController.cs",
+              "RelativeToolTip": "Controllers\\ContactCenterReportController.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAnwEwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-29T09:30:27.265Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "VoipController.cs",
-              "DocumentMoniker": "F:\\WEBAPI_Bravo\\Controllers\\VoipController.cs",
-              "RelativeDocumentMoniker": "Controllers\\VoipController.cs",
-              "ToolTip": "F:\\WEBAPI_Bravo\\Controllers\\VoipController.cs",
-              "RelativeToolTip": "Controllers\\VoipController.cs",
-              "ViewState": "AgIAANAAAAAAAAAAAAASwOAAAABAAAAAAAAAAA==",
+              "Title": "WallboadController.cs",
+              "DocumentMoniker": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\WallboadController.cs",
+              "RelativeDocumentMoniker": "Controllers\\WallboadController.cs",
+              "ToolTip": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\WallboadController.cs",
+              "RelativeToolTip": "Controllers\\WallboadController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAKEBAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T16:35:37.748Z",
+              "WhenOpened": "2024-11-09T03:37:59.752Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "caseData.cs",
+              "DocumentMoniker": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\DinamicModel\\caseData.cs",
+              "RelativeDocumentMoniker": "DinamicModel\\caseData.cs",
+              "ToolTip": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\DinamicModel\\caseData.cs",
+              "RelativeToolTip": "DinamicModel\\caseData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBIAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T18:13:10.248Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-09T03:38:29.439Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "VoipController.cs",
+              "DocumentMoniker": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\VoipController.cs",
+              "RelativeDocumentMoniker": "Controllers\\VoipController.cs",
+              "ToolTip": "E:\\Api2025\\apiDataBravo\\WEBAPI_Bravo\\Controllers\\VoipController.cs",
+              "RelativeToolTip": "Controllers\\VoipController.cs",
+              "ViewState": "AgIAADYBAAAAAAAAAAAcwE0BAABbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T16:35:37.748Z"
             }
           ]
         }

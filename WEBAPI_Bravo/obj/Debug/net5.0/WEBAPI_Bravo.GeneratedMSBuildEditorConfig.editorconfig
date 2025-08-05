@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = WEBAPI_Bravo
-build_property.ProjectDir = C:\Project\bravo\ApiBravo\apiDataBravo\WEBAPI_Bravo\
+build_property.ProjectDir = C:\2025ApiBravo\apiDataBravo\WEBAPI_Bravo\

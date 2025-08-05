@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Principal;
 using System.Text.Json;
@@ -9,6 +10,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using WEBAPI_Bravo.DinamicModel;
 using WEBAPI_Bravo.ExternalServices;
 using WEBAPI_Bravo.Model;
@@ -23,11 +27,13 @@ namespace WEBAPI_Bravo.Controllers
     {
         private readonly BravoContext _context;
         private readonly ExternalApiService _externalApiService;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
 
-        public DataKelolaController(BravoContext context, ExternalApiService externalApiService)
+        public DataKelolaController(BravoContext context, ExternalApiService externalApiService, IServiceScopeFactory serviceScopeFactory)
         {
             _context = context;
             _externalApiService = externalApiService;
+            _serviceScopeFactory = serviceScopeFactory;
         }
 
         // GET: api/MCustomers
@@ -117,10 +123,10 @@ namespace WEBAPI_Bravo.Controllers
 
                 //  var customers = await _context.MCustomers.Where(x => x.Hp == InputData || x.Email == InputData).ToListAsync();
                 var customers = (from c in _context.MCustomers
-                               join channel in _context.CustomerChannels
-                               on c.CustomerId equals channel.CustomerID into customerChannels
-                               from channel in customerChannels.DefaultIfEmpty()
-                               where channel.ValueChannel == InputData
+                                 join channel in _context.CustomerChannels
+                                 on c.CustomerId equals channel.CustomerID into customerChannels
+                                 from channel in customerChannels.DefaultIfEmpty()
+                                 where channel.ValueChannel == InputData
                                  //||
                                  //      c.Hp.ToLower().Contains(inputData) ||
                                  //      c.Email.ToLower().Contains(inputData) ||
@@ -129,64 +135,64 @@ namespace WEBAPI_Bravo.Controllers
                                  //      c.Twitter.ToLower().Contains(inputData) ||
                                  //      c.PolisNumber.ToLower().Contains(inputData)
                                  select new
-                               {
-                                   Title = c.Tittle,
-                                   CustomerId = c.CustomerId,
-                                   Noktp = c.Noktp,
-                                   Name = c.Name,
-                                   Birth = c.Birth,
-                                   Gender = c.JenisKelamin,
-                                   CompanyName = c.NamaPerusahaan,
-                                   Phone = c.Telepon,
-                                   Email = c.Email,
-                                   Password = c.Password,
-                                   Address = c.Alamat,
-                                   City = c.City,
-                                   Region = c.Region,
-                                   SocialNetwork = c.NetworkSocial,
-                                   CustomerStatus = c.CusStatus,
-                                   Facebook = c.Facebook,
-                                   Twitter = c.Twitter,
-                                   Kaskus = c.Kaskus,
-                                   HomePhone = c.Home,
-                                   OfficePhone = c.Office,
-                                   Mobile = c.Hp,
-                                   OtherContacts = c.Others,
-                                   Message = c.Pesan,
-                                   //AlamatIp = c.AlamatIp,
-                                   SiteId = c.SiteId,
-                                   SitePassword = c.SitePassword,
-                                   // SiteIp = c.SiteIp,
-                                   Login = c.Login,
-                                   Path = c.Path,
-                                   CreatedBy = c.UserCreateCustomer,
-                                   CreatedDate = c.DateCreateCustomer,
-                                   Source = c.SourceCreate,
-                                   UpdatedBy = c.UserUpdate,
-                                   UpdatedDate = c.DateUpdate,
-                                   UpdateStatus = c.StatusUpdated,
-                                   LastUpdatedDate = c.DateLastUpdated,
-                                   Status = c.Status,
-                                   Relations = c.Relations,
-                                   CompanyId = c.CompId,
-                                   AccountNumber = c.NomorRekening,
-                                   Branch = c.Cabang,
-                                   Nik = c.Nik,
-                                   AccountId = c.Cif,
-                                   GroupId = c.GroupId,
-                                   Na = c.Na,
-                                   Instagram = c.Instagram,
-                                   CityBilling = c.Kota,
-                                   Province = c.Provinsi,
-                                   PolicyNumber = c.PolisNumber,
-                                   BillingCity = c.BillingKota,
-                                   BillingProvince = c.BillingProvinsi,
-                                   AutoGenerateId = c.AutoGenerateId,
-                                   NPWP = c.NPWP,
-                                   ContactDynamicId = c.ContactDynamicId
-                               })
-                              
-              
+                                 {
+                                     Title = c.Tittle,
+                                     CustomerId = c.CustomerId,
+                                     Noktp = c.Noktp,
+                                     Name = c.Name,
+                                     Birth = c.Birth,
+                                     Gender = c.JenisKelamin,
+                                     CompanyName = c.NamaPerusahaan,
+                                     Phone = c.Telepon,
+                                     Email = c.Email,
+                                     Password = c.Password,
+                                     Address = c.Alamat,
+                                     City = c.City,
+                                     Region = c.Region,
+                                     SocialNetwork = c.NetworkSocial,
+                                     CustomerStatus = c.CusStatus,
+                                     Facebook = c.Facebook,
+                                     Twitter = c.Twitter,
+                                     Kaskus = c.Kaskus,
+                                     HomePhone = c.Home,
+                                     OfficePhone = c.Office,
+                                     Mobile = c.Hp,
+                                     OtherContacts = c.Others,
+                                     Message = c.Pesan,
+                                     //AlamatIp = c.AlamatIp,
+                                     SiteId = c.SiteId,
+                                     SitePassword = c.SitePassword,
+                                     // SiteIp = c.SiteIp,
+                                     Login = c.Login,
+                                     Path = c.Path,
+                                     CreatedBy = c.UserCreateCustomer,
+                                     CreatedDate = c.DateCreateCustomer,
+                                     Source = c.SourceCreate,
+                                     UpdatedBy = c.UserUpdate,
+                                     UpdatedDate = c.DateUpdate,
+                                     UpdateStatus = c.StatusUpdated,
+                                     LastUpdatedDate = c.DateLastUpdated,
+                                     Status = c.Status,
+                                     Relations = c.Relations,
+                                     CompanyId = c.CompId,
+                                     AccountNumber = c.NomorRekening,
+                                     Branch = c.Cabang,
+                                     Nik = c.Nik,
+                                     AccountId = c.Cif,
+                                     GroupId = c.GroupId,
+                                     Na = c.Na,
+                                     Instagram = c.Instagram,
+                                     CityBilling = c.Kota,
+                                     Province = c.Provinsi,
+                                     PolicyNumber = c.PolisNumber,
+                                     BillingCity = c.BillingKota,
+                                     BillingProvince = c.BillingProvinsi,
+                                     AutoGenerateId = c.AutoGenerateId,
+                                     NPWP = c.NPWP,
+                                     ContactDynamicId = c.ContactDynamicId
+                                 })
+
+
                .ToList();
 
                 return Ok(customers); // Return 200 OK with the list of customers
@@ -201,26 +207,26 @@ namespace WEBAPI_Bravo.Controllers
         }
 
 
-        //[HttpGet("GetDataType")]
-        //public async Task<ActionResult<IEnumerable<BraCustomerType>>> GetDataType()
-        //{
-        //    try
-        //    {
-        //        var customers = await _context.BraCustomerTypes
-        //      .ToListAsync();
-        //        return Ok(customers);
-        //    }
-        //    catch (Exception ex)
-        //    {
+        [HttpGet("GetDataType")]
+        public async Task<ActionResult<IEnumerable<BraCustomerType>>> GetDataType()
+        {
+            try
+            {
+                var customers = await _context.BraCustomerTypes
+              .ToListAsync();
+                return Ok(customers);
+            }
+            catch (Exception ex)
+            {
 
 
-        //        return StatusCode(500, "Internal server error"); // Return 500 Internal Server Error
-        //    }
+                return StatusCode(500, "Internal server error"); // Return 500 Internal Server Error
+            }
 
 
 
 
-        //}
+        }
 
         [HttpGet("GetSourceType")]
         public async Task<ActionResult<IEnumerable<MSourceType>>> GetSourceType()
@@ -427,9 +433,791 @@ namespace WEBAPI_Bravo.Controllers
 
 
         }
-        [HttpPost("createTicketDataDk")]
-        public async Task<IActionResult> createTicketDataDk([FromBody] Ticket request)
 
+        [HttpPost("CreateTicketDataDk")]
+        public async Task<IActionResult> CreateTicketDataDk([FromBody] Ticket request)
+        {
+            using (var scope = _serviceScopeFactory.CreateScope())  // Create a new DI scope
+            {
+                var _scopedContext = scope.ServiceProvider.GetRequiredService<BravoContext>();  // Get new DbContext instance
+                _scopedContext.Database.SetCommandTimeout(360);
+
+                try
+                {
+                    string strTime = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                    string strGenesysNumber = request.GenesysNumber ?? (strTime + new Random().Next(100000000, 999999999));
+                    string strThreadID = request.ThreadID ?? (strTime + new Random().Next(1000000, 9999999));
+
+                    var sqlParams = new[]
+                    {
+                new SqlParameter("@TicketNumber", strTime),
+                new SqlParameter("@GenesysNumber", strGenesysNumber),
+                new SqlParameter("@ThreadID", strThreadID),
+                new SqlParameter("@Account", request.Account),
+                new SqlParameter("@Channel", request.Channel),
+                new SqlParameter("@CustomerID", request.CustomerID),
+                new SqlParameter("@UserName", request.UserName),
+                new SqlParameter("@Priority", request.Priority),
+                new SqlParameter("@Status", request.Status),
+                new SqlParameter("@Subject", request.Subject),
+                new SqlParameter("@Kategori", request.Kategori),
+                new SqlParameter("@SubKategori", request.SubKategori),
+                new SqlParameter("@NoAju", string.IsNullOrEmpty(request.NoAju) ? "" : request.NoAju),
+                new SqlParameter("@NilaiTransaksi", request.NilaiTransaksi),
+                new SqlParameter("@Kantor", request.Kantor),
+                new SqlParameter("@Pertanyaan", request.Pertanyaan ?? ""),
+                new SqlParameter("@Jawaban", request.Jawaban ?? ""),
+                new SqlParameter("@Posisi", request.Posisi ?? ""),
+                new SqlParameter("@NamaPerusahaan", request.NamaPerusahaan ?? ""),
+                new SqlParameter("@EmailPerusahaan", request.EmailPerusahaan ?? ""),
+                new SqlParameter("@TeleponPerusahaan", request.TeleponPerusahaan ?? ""),
+                new SqlParameter("@NPWPPerusahaan", request.NPWPPerusahaan ?? ""),
+                new SqlParameter("@Action", request.Action)
+            };
+
+                    await _scopedContext.Database.ExecuteSqlRawAsync(
+                        "EXEC BRA_CreateTicket_DK @TicketNumber, @GenesysNumber, @ThreadID, @Account, @Channel, @CustomerID, @UserName, @Priority, @Status, @Subject, @Kategori, @SubKategori, @NoAju, @NilaiTransaksi, @Kantor, @Pertanyaan, @Jawaban, @Posisi, @NamaPerusahaan, @EmailPerusahaan, @TeleponPerusahaan, @NPWPPerusahaan, @Action",
+                        sqlParams
+                    );
+
+                    // Process additional data
+                    var categoryName = await _scopedContext.TrmCategories
+                        .Where(x => x.CategoryId == request.Kategori)
+                        .Select(x => x.Name)
+                        .FirstOrDefaultAsync();
+
+                    var subCategoryName = await _scopedContext.MSubCategoryLv1s
+                        .Where(x => x.Id == int.Parse(request.SubKategori))
+                        .Select(x => x.SubName)
+                        .FirstOrDefaultAsync();
+
+                    string agentName = "Nama Agent: " + await _scopedContext.MsUsers
+                        .Where(x => x.Username == request.UserName)
+                        .Select(x => x.Name)
+                        .FirstOrDefaultAsync();
+
+                    string laporan = request.Pertanyaan?.Replace("\r", "").Replace("\n", "\\n") ?? "";
+
+                    if (request.Action == "2")
+                    {
+                        var caseDataDk = new caseData
+                        {
+                            NamaKantor = request.Kantor,
+                            NamaKategory = categoryName,
+                            NamaSubCategory = subCategoryName,
+                            AccountId = request.AccountId,
+                            ContactId = Guid.Parse(request.ContactId),
+                            Origin = request.Channel,
+                            Priority = request.Priority,
+                            Judul = request.Subject,
+                            NoTicket = strTime,
+                            Description = $"{agentName}\n\n{laporan}"
+                        };
+
+                        var response = await _externalApiService.PostCaseAsync(caseDataDk);
+
+                        if (!string.IsNullOrEmpty(response))
+                        {
+                            try
+                            {
+                                JObject jsonResponse = JObject.Parse(response);
+                                string ticketDynamic = jsonResponse["Datas"]?[0]?["TicketDynamic"]?.ToString() ?? "";
+                                bool success = jsonResponse["Success"]?.ToObject<bool>() ?? false;
+                                string exception = success ? "Success Create Ticket from Dynamic." : jsonResponse["Exception"]?.ToString();
+
+                                // Update local DB
+                                await _scopedContext.Database.ExecuteSqlRawAsync(
+                                    "EXEC BRA_Update_Ticket_Dynamic @TicketNumber, @TicketDynamic",
+                                    new SqlParameter("@TicketNumber", strTime),
+                                    new SqlParameter("@TicketDynamic", ticketDynamic)
+                                );
+
+                                if (success)
+                                {
+                                    return StatusCode(201, new
+                                    {
+                                        message = "Success Create Ticket.",
+                                        ticketNumber = strTime,
+                                        dynamicTicket = ticketDynamic
+                                    });
+                                }
+                                else
+                                {
+                                    return BadRequest(new
+                                    {
+                                        message = "Failed Create Ticket.",
+                                        detail = exception
+                                    });
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                return StatusCode(500, new
+                                {
+                                    message = "Error parsing external API response.",
+                                    detail = e.Message
+                                });
+                            }
+                        }
+                        else
+                        {
+                            return StatusCode(500, new { message = "Empty response from external API." });
+                        }
+                    }
+
+                    // Return success for Action != 2
+                    return StatusCode(201, new
+                    {
+                        message = "Success Create Ticket.",
+                        ticketNumber = strTime
+                    });
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(400, new
+                    {
+                        message = "Error during ticket creation.",
+                        detail = ex.Message
+                    });
+                }
+            }
+        }
+
+        [HttpPost("insertBuble")]
+        public async Task<IActionResult> InsertChat([FromBody] ChatInsertDto chat)
+        {
+            try
+            {
+                var sql = "EXEC BRA_InsertChatDK_Buble " +
+                          "@ChatHeaderId,@FirstResponseAgent, @HandlingTime, @DateCreatedAt, @DateDistribute, " +
+                          "@PertanyaanPJ, @JawabanAgent, @BubblePJ, @BubbleAgent, @TotalBubble, @DateCreated";
+
+                var parameters = new[]
+                {
+                new SqlParameter("@ChatHeaderId", chat.ChatHeaderId),
+                new SqlParameter("@FirstResponseAgent", chat.FirstResponseAgent ?? (object)DBNull.Value),
+                new SqlParameter("@HandlingTime", chat.HandlingTime ?? (object)DBNull.Value),
+                new SqlParameter("@DateCreatedAt", chat.DateCreatedAt ?? (object)DBNull.Value),
+                new SqlParameter("@DateDistribute", chat.DateDistribute ?? (object)DBNull.Value),
+                new SqlParameter("@PertanyaanPJ", chat.PertanyaanPJ ?? (object)DBNull.Value),
+                new SqlParameter("@JawabanAgent", chat.JawabanAgent ?? (object)DBNull.Value),
+                new SqlParameter("@BubblePJ", chat.BubblePJ ?? (object)DBNull.Value),
+                new SqlParameter("@BubbleAgent", chat.BubbleAgent ?? (object)DBNull.Value),
+                new SqlParameter("@TotalBubble", chat.TotalBubble ?? (object)DBNull.Value),
+                new SqlParameter("@DateCreated", chat.DateCreated ?? (object)DBNull.Value)
+            };
+
+                await _context.Database.ExecuteSqlRawAsync(sql, parameters);
+
+                return Ok(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
+        }
+    
+    
+
+    [HttpPost("CreateTicketDataDkSample")]
+        public async Task<IActionResult> CreateTicketDataDkSampe([FromBody] Ticket request)
+        {
+            try
+            {
+                _context.Database.SetCommandTimeout(360);
+
+                string strTime = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                string strGenesysNumber = request.GenesysNumber ?? (strTime + new Random().Next(100000000, 999999999));
+                string strThreadID = request.ThreadID ?? (strTime + new Random().Next(1000000, 9999999));
+
+                var sqlParams = new[]
+                {
+            new SqlParameter("@TicketNumber", strTime),
+            new SqlParameter("@GenesysNumber", strGenesysNumber),
+            new SqlParameter("@ThreadID", strThreadID),
+            new SqlParameter("@Account", request.Account),
+            new SqlParameter("@Channel", request.Channel),
+            new SqlParameter("@CustomerID", request.CustomerID),
+            new SqlParameter("@UserName", request.UserName),
+            new SqlParameter("@Priority", request.Priority),
+            new SqlParameter("@Status", request.Status),
+            new SqlParameter("@Subject", request.Subject),
+            new SqlParameter("@Kategori", request.Kategori),
+            new SqlParameter("@SubKategori", request.SubKategori),
+            new SqlParameter("@NoAju", string.IsNullOrEmpty(request.NoAju) ? "" : request.NoAju),
+            new SqlParameter("@NilaiTransaksi", request.NilaiTransaksi),
+            new SqlParameter("@Kantor", request.Kantor),
+            new SqlParameter("@Pertanyaan", request.Pertanyaan ?? ""),
+            new SqlParameter("@Jawaban", request.Jawaban ?? ""),
+            new SqlParameter("@Posisi", request.Posisi ?? ""),
+            new SqlParameter("@NamaPerusahaan", request.NamaPerusahaan ?? ""),
+            new SqlParameter("@EmailPerusahaan", request.EmailPerusahaan ?? ""),
+            new SqlParameter("@TeleponPerusahaan", request.TeleponPerusahaan ?? ""),
+            new SqlParameter("@NPWPPerusahaan", request.NPWPPerusahaan ?? ""),
+           // new SqlParameter("@DateCreate", request.DateCreate),
+            new SqlParameter("@Action", request.Action)
+        };
+
+                await _context.Database.ExecuteSqlRawAsync(
+                    "EXEC BRA_CreateTicket_DK_SAMPLE @TicketNumber, @GenesysNumber, @ThreadID, @Account, @Channel, @CustomerID, @UserName, @Priority, @Status, @Subject, @Kategori, @SubKategori, @NoAju, @NilaiTransaksi, @Kantor, @Pertanyaan, @Jawaban, @Posisi, @NamaPerusahaan, @EmailPerusahaan, @TeleponPerusahaan, @NPWPPerusahaan,@DateCreate, @Action",
+                    sqlParams
+                );
+
+                var categoryName = await _context.TrmCategories
+                    .Where(x => x.CategoryId == request.Kategori)
+                    .Select(x => x.Name)
+                    .FirstOrDefaultAsync();
+
+                var subCategoryName = await _context.MSubCategoryLv1s
+                    .Where(x => x.Id == int.Parse(request.SubKategori))
+                    .Select(x => x.SubName)
+                    .FirstOrDefaultAsync();
+
+                string agentName = "Nama Agent: " + await _context.MsUsers
+                    .Where(x => x.Username == request.UserName)
+                    .Select(x => x.Name)
+                    .FirstOrDefaultAsync();
+
+                string laporan = request.Pertanyaan?.Replace("\r", "").Replace("\n", "\\n") ?? "";
+
+                if (request.Action == "2")
+                {
+                    var caseDataDk = new caseData
+                    {
+                        NamaKantor = request.Kantor,
+                        NamaKategory = categoryName,
+                        NamaSubCategory = subCategoryName,
+                        AccountId = request.AccountId,
+                        ContactId = Guid.Parse(request.ContactId),
+                        Origin = request.Channel,
+                        Priority = request.Priority,
+                        Judul = request.Subject,
+                        NoTicket = strTime,
+                        Description = $"{agentName}\n\n{laporan}"
+                    };
+
+                    var response = await _externalApiService.PostCaseAsync(caseDataDk);
+
+                    JObject jsonResponse = JObject.Parse(response);
+                    string ticketDynamic = jsonResponse["Datas"]?[0]?["TicketDynamic"]?.ToString() ?? "";
+
+                    await _context.Database.ExecuteSqlRawAsync(
+                        "EXEC BRA_Update_Ticket_Dynamic @TicketNumber, @TicketDynamic",
+                        new SqlParameter("@TicketNumber", strTime),
+                        new SqlParameter("@TicketDynamic", ticketDynamic)
+                    );
+
+                    if (!string.IsNullOrEmpty(response))
+                    {
+                        try
+                        {
+                            using (JsonDocument doc = JsonDocument.Parse(response))
+                            {
+                                JsonElement root = doc.RootElement;
+                                bool success = root.TryGetProperty("Success", out JsonElement successElement) && successElement.GetBoolean();
+                                string exception = success ? "Success Create Ticket from Dynamic." : root.GetProperty("Exception").GetString();
+
+                                return success
+                                    ? StatusCode(201, "Success Create Ticket.")
+                                    : StatusCode(400, exception);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            return StatusCode(500, e.ToString());
+                        }
+                    }
+                    else
+                    {
+                        return StatusCode(500, "Empty response from external API.");
+                    }
+                }
+
+                return StatusCode(201, "Success Create Ticket.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+
+            string FormatSqlValue(object val)
+            {
+                if (val == null) return "NULL";
+                if (val is string || val is DateTime) return $"'{val.ToString().Replace("'", "''")}'";
+                if (val is bool) return (bool)val ? "1" : "0";
+                return val.ToString();
+            }
+        }
+
+        //[HttpPost("CreateTicketDataDk")]
+        //public async Task<IActionResult> CreateTicketDataDk([FromBody] Ticket request)
+        //{
+        //    using (var scope = _serviceScopeFactory.CreateScope())  // Create a new DI scope
+        //    {
+        //        var _scopedContext = scope.ServiceProvider.GetRequiredService<BravoContext>();  // Get new DbContext instance
+        //        var commandTimeout = 120; // waktu dalam detik (misal: 2 menit)
+        //        _scopedContext.Database.SetCommandTimeout(commandTimeout);
+        //        try
+        //        {
+        //            string strTime = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+        //            string strGenesysNumber = request.GenesysNumber ?? (strTime + new Random().Next(100000000, 999999999));
+        //            string strThreadID = request.ThreadID ?? (strTime + new Random().Next(1000000, 9999999));
+
+        //            var sqlParams = new[]
+        //            {
+        //        new SqlParameter("@TicketNumber", strTime),
+        //        new SqlParameter("@GenesysNumber", strGenesysNumber),
+        //        new SqlParameter("@ThreadID", strThreadID),
+        //        new SqlParameter("@Account", request.Account),
+        //        new SqlParameter("@Channel", request.Channel),
+        //        new SqlParameter("@CustomerID", request.CustomerID),
+        //        new SqlParameter("@UserName", request.UserName),
+        //        new SqlParameter("@Priority", request.Priority),
+        //        new SqlParameter("@Status", request.Status),
+        //        new SqlParameter("@Subject", request.Subject),
+        //        new SqlParameter("@Kategori", request.Kategori),
+        //        new SqlParameter("@SubKategori", request.SubKategori),
+        //        new SqlParameter("@NoAju", string.IsNullOrEmpty(request.NoAju) ? "" : request.NoAju),
+        //        new SqlParameter("@NilaiTransaksi", request.NilaiTransaksi),
+        //        new SqlParameter("@Kantor", request.Kantor),
+        //        new SqlParameter("@Pertanyaan", request.Pertanyaan ?? ""),
+        //        new SqlParameter("@Jawaban", request.Jawaban ?? ""),
+        //        new SqlParameter("@Posisi", request.Posisi ?? ""),
+        //        new SqlParameter("@NamaPerusahaan", request.NamaPerusahaan ?? ""),
+        //        new SqlParameter("@EmailPerusahaan", request.EmailPerusahaan ?? ""),
+        //        new SqlParameter("@TeleponPerusahaan", request.TeleponPerusahaan ?? ""),
+        //        new SqlParameter("@NPWPPerusahaan", request.NPWPPerusahaan ?? ""),
+        //        new SqlParameter("@Action", request.Action)
+        //    };
+
+
+        //            Console.WriteLine("==== SQL Parameters ====");
+        //            foreach (var p in sqlParams)
+        //            {
+        //                Console.WriteLine($"{p.ParameterName}: {p.Value}");
+        //            }
+
+        //            // ✅ Buat perintah EXEC lengkap untuk SSMS
+        //            var execCommand = new System.Text.StringBuilder();
+        //            execCommand.Append("EXEC BRA_CreateTicket_DK ");
+
+        //            for (int i = 0; i < sqlParams.Length; i++)
+        //            {
+        //                var p = sqlParams[i];
+        //                string value = FormatSqlValue(p.Value);
+        //                execCommand.Append($"{p.ParameterName} = {value}");
+
+        //                if (i < sqlParams.Length - 1)
+        //                    execCommand.Append(", ");
+        //            }
+
+        //            // Tampilkan hasil EXEC SQL
+        //            Console.WriteLine("==== EXEC Command for SSMS ====");
+        //            Console.WriteLine(execCommand.ToString());
+
+        //            _scopedContext.Database.SetCommandTimeout(360); // misal 120 detik
+        //            await _scopedContext.Database.ExecuteSqlRawAsync(
+        //                "EXEC BRA_CreateTicket_DK @TicketNumber, @GenesysNumber, @ThreadID, @Account, @Channel, @CustomerID, @UserName, @Priority, @Status, @Subject, @Kategori, @SubKategori, @NoAju, @NilaiTransaksi, @Kantor, @Pertanyaan, @Jawaban, @Posisi, @NamaPerusahaan, @EmailPerusahaan, @TeleponPerusahaan, @NPWPPerusahaan, @Action",
+        //                sqlParams
+        //            );
+
+        //            // Process additional data
+        //            var categoryName = await _scopedContext.TrmCategories
+        //                .Where(x => x.CategoryId == request.Kategori)
+        //                .Select(x => x.Name)
+        //                .FirstOrDefaultAsync();
+
+        //            var subCategoryName = await _scopedContext.MSubCategoryLv1s
+        //                .Where(x => x.Id == int.Parse(request.SubKategori))
+        //                .Select(x => x.SubName)
+        //                .FirstOrDefaultAsync();
+
+        //            string agentName = "Nama Agent: " + await _scopedContext.MsUsers
+        //                .Where(x => x.Username == request.UserName)
+        //                .Select(x => x.Name)
+        //                .FirstOrDefaultAsync();
+
+        //            string laporan = request.Pertanyaan?.Replace("\r", "").Replace("\n", "\\n") ?? "";
+
+        //            if (request.Action == "2")
+        //            {
+        //                var caseDataDk = new caseData
+        //                {
+        //                    NamaKantor = request.Kantor,
+        //                    NamaKategory = categoryName,
+        //                    NamaSubCategory = subCategoryName,
+        //                    AccountId = request.AccountId,
+        //                    ContactId = Guid.Parse(request.ContactId),
+        //                    Origin = request.Channel,
+        //                    Priority = request.Priority,
+        //                    Judul = request.Subject,
+        //                    NoTicket = strTime,
+        //                    Description = $"{agentName}\n\n{laporan}"
+        //                };
+
+        //                var response = await _externalApiService.PostCaseAsync(caseDataDk);
+
+        //                JObject jsonResponse = JObject.Parse(response);
+        //                string ticketDynamic = jsonResponse["Datas"]?[0]?["TicketDynamic"]?.ToString() ?? "";
+
+        //                   await _scopedContext.Database.ExecuteSqlRawAsync(
+        //                "EXEC BRA_Update_Ticket_Dynamic @TicketNumber, @TicketDynamic",
+        //                new SqlParameter("@TicketNumber", strTime),
+        //                new SqlParameter("@TicketDynamic", ticketDynamic)
+        //            );
+
+        //                if (!string.IsNullOrEmpty(response))
+        //                {
+        //                    try
+        //                    {
+        //                        using (JsonDocument doc = JsonDocument.Parse(response))
+        //                        {
+        //                            JsonElement root = doc.RootElement;
+        //                            bool success = root.TryGetProperty("Success", out JsonElement successElement) && successElement.GetBoolean();
+        //                            string exception = success ? "Success Create Ticket from Dynamic." : root.GetProperty("Exception").GetString();
+
+        //                            if (success == true)
+        //                                return StatusCode(201, "Success Create Ticket.");
+        //                            else
+        //                                return StatusCode(400, exception);
+        //                        }
+        //                    }
+        //                    catch (Exception e)
+        //                    {
+        //                        return StatusCode(500, e.ToString());
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    return StatusCode(500, "Empty response from external API.");
+        //                }
+        //            }
+
+        //            return StatusCode(201, Response);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return StatusCode(400, ex.Message);
+        //        }
+        //    }
+
+        //    string FormatSqlValue(object val)
+        //    {
+        //        if (val == null)
+        //            return "NULL";
+
+        //        if (val is string || val is DateTime)
+        //            return $"'{val.ToString().Replace("'", "''")}'"; // escape tanda petik
+
+        //        if (val is bool)
+        //            return (bool)val ? "1" : "0";
+
+        //        return val.ToString(); // untuk int, decimal, dll
+        //    }
+        //}
+
+        [HttpPost("InsertTicketUsingSPWithResponse")]
+        public async Task<int> InsertTicketUsingSPWithResponse(string jsonData)
+        {
+            try
+            {
+                // Parse JSON ke objek C#
+                var ticket = JsonConvert.DeserializeObject<Ticket>(jsonData);
+
+                DateTime specificDate = new DateTime(2025, 3, 26, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second, DateTime.Now.Millisecond);
+                string strTime = specificDate.ToString("yyyyMMddHHmmssfff");
+
+                string strThreadID = strTime + new Random().Next(1000000, 9999999);
+
+                // Menyiapkan parameter untuk eksekusi SP
+                var sqlParams = new[]
+                {
+            new SqlParameter("@TicketNumber",strTime),
+            new SqlParameter("@GenesysNumber", ticket.GenesysNumber ?? (object)DBNull.Value),
+            new SqlParameter("@ThreadID", strThreadID),
+            new SqlParameter("@Account", ticket.Account ?? (object)DBNull.Value),
+            new SqlParameter("@Channel", ticket.Channel ?? (object)DBNull.Value),
+            new SqlParameter("@CustomerID", ticket.CustomerID ?? (object)DBNull.Value),
+            new SqlParameter("@UserName", ticket.UserName ?? (object)DBNull.Value),
+            new SqlParameter("@Priority", ticket.Priority ?? (object)DBNull.Value),
+            new SqlParameter("@Status", ticket.Status ?? (object)DBNull.Value),
+            new SqlParameter("@Subject", ticket.Subject ?? (object)DBNull.Value),
+            new SqlParameter("@Kategori", ticket.Kategori ?? (object)DBNull.Value),
+            new SqlParameter("@SubKategori", ticket.SubKategori ?? (object)DBNull.Value),
+            new SqlParameter("@NoAju", ticket.NoAju ?? (object)DBNull.Value),
+            new SqlParameter("@NilaiTransaksi", ticket.NilaiTransaksi ?? (object)DBNull.Value),
+            new SqlParameter("@Kantor", ticket.Kantor ?? (object)DBNull.Value),
+            new SqlParameter("@Pertanyaan", ticket.Pertanyaan ?? (object)DBNull.Value),
+            new SqlParameter("@Jawaban", ticket.Jawaban ?? (object)DBNull.Value),
+            new SqlParameter("@Posisi", ticket.Posisi ?? (object)DBNull.Value),
+            new SqlParameter("@NamaPerusahaan", ticket.NamaPerusahaan ?? (object)DBNull.Value),
+            new SqlParameter("@EmailPerusahaan", ticket.EmailPerusahaan ?? (object)DBNull.Value),
+            new SqlParameter("@TeleponPerusahaan", ticket.TeleponPerusahaan ?? (object)DBNull.Value),
+            new SqlParameter("@NPWPPerusahaan", ticket.NPWPPerusahaan ?? (object)DBNull.Value),
+            new SqlParameter("@Action", ticket.Action ?? (object)DBNull.Value),
+
+            // Output parameter untuk mendapatkan TicketID
+            //new SqlParameter("@TicketID", SqlDbType.Int) { Direction = ParameterDirection.Output }
+        };
+
+                // Eksekusi SP
+                await _context.Database.ExecuteSqlRawAsync(
+                    "EXEC BRA_CreateTicket_DK_123 @TicketNumber, @GenesysNumber, @ThreadID, @Account, @Channel, @CustomerID, @UserName, @Priority, @Status, @Subject, @Kategori, @SubKategori, @NoAju, @NilaiTransaksi, @Kantor, @Pertanyaan, @Jawaban, @Posisi, @NamaPerusahaan, @EmailPerusahaan, @TeleponPerusahaan, @NPWPPerusahaan, @Action",
+                    sqlParams
+                );
+
+                // Mengambil nilai dari output parameter
+
+                return 1; // Mengembalikan ID ticket yang baru saja dimasukkan
+            }
+            catch (SqlException sqlEx)
+            {
+                // Log error untuk SQL exceptions
+                Console.Error.WriteLine($"SQL Error: {sqlEx.Message}");
+                throw; // Optional: Rethrow or handle the exception as needed
+            }
+            catch (Exception ex)
+            {
+                // Log error untuk general exceptions
+                Console.Error.WriteLine($"General Error: {ex.Message}");
+                throw; // Optional: Rethrow or handle the exception as needed
+            }
+        }
+
+
+
+        //[HttpPost("createTicketDataDk")]
+        //public async IActionResult createTicketDataDk([FromBody] Ticket request)
+
+        //{
+        //    Task.Run(async () =>
+        //    {
+
+
+        //        var listTickets = new List<Ticket>();
+        //        string strTime = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+        //        string strGenesysNumber, strThreadID, strAccount, strChannel;
+
+        //        if (string.IsNullOrEmpty(request.GenesysNumber))
+        //        {
+        //            strThreadID = strTime + new Random().Next(1000000, 9999999);
+        //            strGenesysNumber = strTime + new Random().Next(100000000, 999999999);
+        //            strAccount = request.Account;
+        //            strChannel = request.Channel;
+        //        }
+        //        else
+        //        {
+        //            strGenesysNumber = request.GenesysNumber;
+        //            strThreadID = request.ThreadID;
+        //            strAccount = request.Account;
+        //            strChannel = request.Channel;
+        //        }
+
+        //        try
+        //        {
+        //            if (request.Action == "2")
+        //            {
+
+
+        //                var _strTime = new SqlParameter("@TicketNumber", strTime);
+        //                var _strGenesysNumber = new SqlParameter("@GenesysNumber", strGenesysNumber);
+        //                var _strThreadID = new SqlParameter("@ThreadID", strThreadID);
+        //                var _strAccount = new SqlParameter("@Account", strAccount);
+        //                var _strChannel = new SqlParameter("@Channel", strChannel);
+        //                var _CustomerID = new SqlParameter("@CustomerID", request.CustomerID);
+        //                var _UserName = new SqlParameter("@UserName", request.UserName);
+        //                var _Priority = new SqlParameter("@Priority", request.Priority);
+        //                var _Status = new SqlParameter("@Status", request.Status);
+        //                var _Subject = new SqlParameter("@Subject", request.Subject);
+        //                var _Kategori = new SqlParameter("@Kategori", request.Kategori);
+        //                var _SubKategori = new SqlParameter("@SubKategori", request.SubKategori);
+        //                var _NoAju = new SqlParameter("@NoAju", string.IsNullOrEmpty(request.NoAju) ? "" : request.NoAju);
+        //                var _NilaiTransaksi = new SqlParameter("@NilaiTransaksi", request.NilaiTransaksi);
+        //                var _Kantor = new SqlParameter("@Kantor", request.Kantor);
+        //                var _Pertanyaan = new SqlParameter("@Pertanyaan", request.Pertanyaan);
+        //                var _Jawaban = new SqlParameter("@Jawaban", request.Jawaban);
+        //                var _Posisi = new SqlParameter("@Posisi", request.Posisi);
+        //                var _NamaPerusahaan = new SqlParameter("@NamaPerusahaan", request.NamaPerusahaan);
+        //                var _EmailPerusahaan = new SqlParameter("@EmailPerusahaan", request.EmailPerusahaan);
+        //                var _TeleponPerusahaan = new SqlParameter("@TeleponPerusahaan", request.TeleponPerusahaan);
+        //                var _NPWPPerusahaan = new SqlParameter("@NPWPPerusahaan", request.NPWPPerusahaan);
+        //                var _Action = new SqlParameter("@Action", request.Action);
+
+
+
+
+
+        //                var result = await _context.Database.ExecuteSqlRawAsync(
+        //                    "EXEC BRA_CreateTicket_DK @TicketNumber, @GenesysNumber, @ThreadID, @Account, @Channel, @CustomerID, @UserName, @Priority, @Status, @Subject, @Kategori, @SubKategori, @NoAju, @NilaiTransaksi, @Kantor, @Pertanyaan, @Jawaban, @Posisi, @NamaPerusahaan, @EmailPerusahaan, @TeleponPerusahaan, @NPWPPerusahaan, @Action",
+        //                                              _strTime, _strGenesysNumber, _strThreadID, _strAccount, _strChannel, _CustomerID, _UserName, _Priority, _Status, _Subject, _Kategori, _SubKategori, _NoAju, _NilaiTransaksi, _Kantor, _Pertanyaan, _Jawaban, _Posisi, _NamaPerusahaan, _EmailPerusahaan, _TeleponPerusahaan, _NPWPPerusahaan, _Action
+
+        //                );
+
+
+        //                var categorydec = _context.TrmCategories.Where(x => x.CategoryId == request.Kategori).Select(x => x.Name).FirstOrDefault();
+        //                var Subcategorydec = _context.MSubCategoryLv1s.Where(x => x.Id == int.Parse(request.SubKategori)).Select(x => x.SubName).FirstOrDefault();
+
+        //                var _caseDataDk = new caseData();
+        //                _caseDataDk.NamaKantor = request.Kantor;
+        //                _caseDataDk.NamaKategory = categorydec;
+        //                _caseDataDk.NamaSubCategory = Subcategorydec;
+        //                _caseDataDk.AccountId = request.AccountId;
+        //                _caseDataDk.ContactId = Guid.Parse(request.ContactId);
+        //                _caseDataDk.Origin = request.Channel;
+        //                _caseDataDk.Priority = request.Priority;
+        //                _caseDataDk.Judul = request.Subject;
+        //                _caseDataDk.NoTicket = strTime;
+
+
+        //                var Accounts = await _externalApiService.PostCaseAsync(_caseDataDk);
+
+        //                bool success = false;
+        //                string exception = "";
+        //                using (JsonDocument doc = JsonDocument.Parse(Accounts))
+        //                {
+        //                    JsonElement root = doc.RootElement;
+
+        //                    // Extract the Success and Exception values
+        //                    success = root.GetProperty("Success").GetBoolean();
+        //                    if (success == true)
+        //                        exception = "Successs Create Ticket from Dynamic.";
+        //                    else
+        //                        exception = root.GetProperty("Exception").GetString();
+
+        //                    // Output the values
+        //                    Console.WriteLine($"Success: {success}");
+        //                    Console.WriteLine($"Exception: {exception}");
+        //                }
+
+        //                if (success == true)
+        //                    return StatusCode(201, "Success Create Ticket.");
+        //                else
+        //                    return StatusCode(400, exception);
+
+
+
+        //            }
+        //            else
+        //            {
+
+
+        //                var _strTime = new SqlParameter("@TicketNumber", strTime);
+        //                var _strGenesysNumber = new SqlParameter("@GenesysNumber", strGenesysNumber);
+        //                var _strThreadID = new SqlParameter("@ThreadID", strThreadID);
+        //                var _strAccount = new SqlParameter("@Account", strAccount);
+        //                var _strChannel = new SqlParameter("@Channel", strChannel);
+        //                var _CustomerID = new SqlParameter("@CustomerID", request.CustomerID);
+        //                var _UserName = new SqlParameter("@UserName", request.UserName);
+        //                var _Priority = new SqlParameter("@Priority", request.Priority);
+        //                var _Status = new SqlParameter("@Status", request.Status);
+        //                var _Subject = new SqlParameter("@Subject", request.Subject);
+        //                var _Kategori = new SqlParameter("@Kategori", request.Kategori);
+        //                var _SubKategori = new SqlParameter("@SubKategori", request.SubKategori);
+        //                var _NoAju = new SqlParameter("@NoAju", string.IsNullOrEmpty(request.NoAju) ? "" : request.NoAju);
+        //                var _NilaiTransaksi = new SqlParameter("@NilaiTransaksi", request.NilaiTransaksi);
+        //                var _Kantor = new SqlParameter("@Kantor", request.Kantor);
+        //                var _Pertanyaan = new SqlParameter("@Pertanyaan", request.Pertanyaan);
+        //                var _Jawaban = new SqlParameter("@Jawaban", request.Jawaban);
+        //                var _Posisi = new SqlParameter("@Posisi", request.Posisi);
+        //                var _NamaPerusahaan = new SqlParameter("@NamaPerusahaan", request.NamaPerusahaan);
+        //                var _EmailPerusahaan = new SqlParameter("@EmailPerusahaan", request.EmailPerusahaan);
+        //                var _TeleponPerusahaan = new SqlParameter("@TeleponPerusahaan", request.TeleponPerusahaan);
+        //                var _NPWPPerusahaan = new SqlParameter("@NPWPPerusahaan", request.NPWPPerusahaan);
+        //                var _Action = new SqlParameter("@Action", request.Action);
+
+
+
+
+
+        //                _context.Database.SetCommandTimeout(60); // Timeout 60 detik
+
+        //                var result = await _context.Database.ExecuteSqlRawAsync(
+        //                    "EXEC BRA_CreateTicket_DK @TicketNumber, @GenesysNumber, @ThreadID, @Account, @Channel, @CustomerID, @UserName, @Priority, @Status, @Subject, @Kategori, @SubKategori, @NoAju, @NilaiTransaksi, @Kantor, @Pertanyaan, @Jawaban, @Posisi, @NamaPerusahaan, @EmailPerusahaan, @TeleponPerusahaan, @NPWPPerusahaan, @Action",
+        //                                              _strTime, _strGenesysNumber, _strThreadID, _strAccount, _strChannel, _CustomerID, _UserName, _Priority, _Status, _Subject, _Kategori, _SubKategori, _NoAju, _NilaiTransaksi, _Kantor, _Pertanyaan, _Jawaban, _Posisi, _NamaPerusahaan, _EmailPerusahaan, _TeleponPerusahaan, _NPWPPerusahaan, _Action
+
+        //                );
+        //                //var result = await _context.Database.ExecuteSqlRawAsync(
+        //                //    "EXEC BRA_CreateTicket_DK @TicketNumber, @GenesysNumber, @ThreadID, @Account, @Channel, @CustomerID, @UserName, @Priority, @Status, @Subject, @Kategori, @SubKategori, @NoAju, @NilaiTransaksi, @Kantor, @Pertanyaan, @Jawaban, @Posisi,@NamaPerusahaan, @EmailPerusahaan,@TeleponPerusahaan,@NPWPPerusahaan , @Action",
+        //                //    new SqlParameter("@TicketNumber", strTime),
+        //                //    new SqlParameter("@GenesysNumber", strGenesysNumber),
+        //                //    new SqlParameter("@ThreadID", strThreadID),
+        //                //    new SqlParameter("@Account", strAccount),
+        //                //    new SqlParameter("@Channel", strChannel),
+        //                //    new SqlParameter("@CustomerID", request.CustomerID),
+        //                //    new SqlParameter("@UserName", request.UserName),
+        //                //    new SqlParameter("@Priority", request.Priority),
+        //                //    new SqlParameter("@Status", request.Status),
+        //                //    new SqlParameter("@Subject", request.Subject),
+        //                //    new SqlParameter("@Kategori", request.Kategori),
+        //                //    new SqlParameter("@SubKategori", request.SubKategori),
+        //                //    new SqlParameter("@NoAju", request.NoAju),
+        //                //    new SqlParameter("@NilaiTransaksi", request.NilaiTransaksi),
+        //                //    new SqlParameter("@Kantor", request.Kantor),
+        //                //    new SqlParameter("@Pertanyaan", Uri.EscapeDataString(request.Pertanyaan)),
+        //                //    new SqlParameter("@Jawaban", Uri.EscapeDataString(request.Jawaban)),
+        //                //    new SqlParameter("@Posisi", request.Posisi),
+        //                //    new SqlParameter("@NamaPerusahaan", request.NamaPerusahaan),
+        //                //    new SqlParameter("@EmailPerusahaan", request.EmailPerusahaan),
+        //                //    new SqlParameter("@TeleponPerusahaan", request.TeleponPerusahaan),
+        //                //    new SqlParameter("@NPWPPerusahaan", request.NPWPPerusahaan),
+        //                //    new SqlParameter("@Action", request.Action)
+        //                //);
+
+
+        //                var ticket = new Ticket
+        //                {
+        //                    TicketNumber = strTime,
+        //                    GenesysNumber = strGenesysNumber,
+        //                    ThreadID = strThreadID,
+        //                    Account = strAccount,
+        //                    Channel = strChannel,
+        //                    CustomerID = request.CustomerID,
+        //                    UserName = request.UserName,
+        //                    Priority = request.Priority,
+        //                    Status = request.Status,
+        //                    Subject = request.Subject,
+        //                    Kategori = request.Kategori,
+        //                    SubKategori = request.SubKategori,
+        //                    NoAju = request.NoAju,
+        //                    NilaiTransaksi = request.NilaiTransaksi,
+        //                    Kantor = request.Kantor,
+        //                    Pertanyaan = request.Pertanyaan,
+        //                    Jawaban = request.Jawaban,
+        //                    NamaPerusahaan = request.NamaPerusahaan,
+        //                    TeleponPerusahaan = request.TeleponPerusahaan,
+        //                    NPWPPerusahaan = request.NPWPPerusahaan,
+        //                    Posisi = request.Posisi,
+        //                    Action = request.Action
+        //                };
+
+        //                listTickets.Add(ticket);
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return StatusCode(400, ex.ToString());
+
+        //        }
+
+
+        //    });
+
+        //    //var js = new JavaScriptSerializer();
+        //    return StatusCode(201, "ok");
+        //}
+
+        //[HttpPost("createTicketDataDk")]
+        //public IActionResult CreateTicketDataDk([FromBody] Ticket request)
+        //{
+        //    Task.Run(async () =>
+        //    {
+        //        await ProcessCreateTicket(request);
+        //    });
+
+        //    return StatusCode(202, "Request is being processed in the background.");
+        //}
+
+        async Task<IActionResult> ProcessCreateTicket(Ticket request)
         {
             var listTickets = new List<Ticket>();
             string strTime = DateTime.Now.ToString("yyyyMMddHHmmssfff");
@@ -455,19 +1243,55 @@ namespace WEBAPI_Bravo.Controllers
                 if (request.Action == "2")
                 {
 
+
+                    var _strTime = new SqlParameter("@TicketNumber", strTime);
+                    var _strGenesysNumber = new SqlParameter("@GenesysNumber", strGenesysNumber);
+                    var _strThreadID = new SqlParameter("@ThreadID", strThreadID);
+                    var _strAccount = new SqlParameter("@Account", strAccount);
+                    var _strChannel = new SqlParameter("@Channel", strChannel);
+                    var _CustomerID = new SqlParameter("@CustomerID", request.CustomerID);
+                    var _UserName = new SqlParameter("@UserName", request.UserName);
+                    var _Priority = new SqlParameter("@Priority", request.Priority);
+                    var _Status = new SqlParameter("@Status", request.Status);
+                    var _Subject = new SqlParameter("@Subject", request.Subject);
+                    var _Kategori = new SqlParameter("@Kategori", request.Kategori);
+                    var _SubKategori = new SqlParameter("@SubKategori", request.SubKategori);
+                    var _NoAju = new SqlParameter("@NoAju", string.IsNullOrEmpty(request.NoAju) ? "" : request.NoAju);
+                    var _NilaiTransaksi = new SqlParameter("@NilaiTransaksi", request.NilaiTransaksi);
+                    var _Kantor = new SqlParameter("@Kantor", request.Kantor);
+                    var _Pertanyaan = new SqlParameter("@Pertanyaan", request.Pertanyaan);
+                    var _Jawaban = new SqlParameter("@Jawaban", request.Jawaban);
+                    var _Posisi = new SqlParameter("@Posisi", request.Posisi);
+                    var _NamaPerusahaan = new SqlParameter("@NamaPerusahaan", request.NamaPerusahaan);
+                    var _EmailPerusahaan = new SqlParameter("@EmailPerusahaan", request.EmailPerusahaan);
+                    var _TeleponPerusahaan = new SqlParameter("@TeleponPerusahaan", request.TeleponPerusahaan);
+                    var _NPWPPerusahaan = new SqlParameter("@NPWPPerusahaan", request.NPWPPerusahaan);
+                    var _Action = new SqlParameter("@Action", request.Action);
+
+
+
+
+
+                    var result = await _context.Database.ExecuteSqlRawAsync(
+                        "EXEC BRA_CreateTicket_DK @TicketNumber, @GenesysNumber, @ThreadID, @Account, @Channel, @CustomerID, @UserName, @Priority, @Status, @Subject, @Kategori, @SubKategori, @NoAju, @NilaiTransaksi, @Kantor, @Pertanyaan, @Jawaban, @Posisi, @NamaPerusahaan, @EmailPerusahaan, @TeleponPerusahaan, @NPWPPerusahaan, @Action",
+                                                  _strTime, _strGenesysNumber, _strThreadID, _strAccount, _strChannel, _CustomerID, _UserName, _Priority, _Status, _Subject, _Kategori, _SubKategori, _NoAju, _NilaiTransaksi, _Kantor, _Pertanyaan, _Jawaban, _Posisi, _NamaPerusahaan, _EmailPerusahaan, _TeleponPerusahaan, _NPWPPerusahaan, _Action
+
+                    );
+
+
                     var categorydec = _context.TrmCategories.Where(x => x.CategoryId == request.Kategori).Select(x => x.Name).FirstOrDefault();
-                    var Subcategorydec = _context.MSubCategoryLv1s.Where(x => x.SubCategory1Id == request.SubKategori).Select(x => x.SubName).FirstOrDefault();
+                    var Subcategorydec = _context.MSubCategoryLv1s.Where(x => x.Id == int.Parse(request.SubKategori)).Select(x => x.SubName).FirstOrDefault();
 
                     var _caseDataDk = new caseData();
                     _caseDataDk.NamaKantor = request.Kantor;
                     _caseDataDk.NamaKategory = categorydec;
                     _caseDataDk.NamaSubCategory = Subcategorydec;
-                    _caseDataDk.AccountId = Guid.Parse(request.AccountId);
+                    _caseDataDk.AccountId = request.AccountId;
                     _caseDataDk.ContactId = Guid.Parse(request.ContactId);
                     _caseDataDk.Origin = request.Channel;
                     _caseDataDk.Priority = request.Priority;
                     _caseDataDk.Judul = request.Subject;
-                    _caseDataDk.NoTicket = request.TicketNumber;
+                    _caseDataDk.NoTicket = strTime;
 
 
                     var Accounts = await _externalApiService.PostCaseAsync(_caseDataDk);
@@ -525,6 +1349,7 @@ namespace WEBAPI_Bravo.Controllers
                     var _TeleponPerusahaan = new SqlParameter("@TeleponPerusahaan", request.TeleponPerusahaan);
                     var _NPWPPerusahaan = new SqlParameter("@NPWPPerusahaan", request.NPWPPerusahaan);
                     var _Action = new SqlParameter("@Action", request.Action);
+
 
 
 
@@ -873,9 +1698,154 @@ namespace WEBAPI_Bravo.Controllers
 
         }
 
+        [HttpGet("GetJourneyCustomer")]
+        public async Task<List<dtoJourney>> GetJourneyCustomer(string CustomerId)
+        {
+            var users = new List<dtoJourney>();
+
+            try
+            {
+                using (var connection = _context.Database.GetDbConnection())
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = connection.CreateCommand())
+
+
+                    {
+                        command.CommandText = "EXEC UIDESK_TrxTransactionTicket @TrxID,@TrxSearching,@TrxUserName,@TrxAction"; // Use parameter directly in command text
+                        command.CommandType = CommandType.Text;
+                        var typeParameter = new SqlParameter("@TrxID", CustomerId);
+                        var typeParameter2 = new SqlParameter("@TrxSearching", "");
+                        var typeParameter3 = new SqlParameter("@TrxUserName", "");
+                        var typeParameter4 = new SqlParameter("@TrxAction", "UIDESK332A");
+
+                        command.Parameters.Add(typeParameter);
+                        command.Parameters.Add(typeParameter2);
+                        command.Parameters.Add(typeParameter3);
+                        command.Parameters.Add(typeParameter4);
+
+                        using (var result = await command.ExecuteReaderAsync())
+                        {
+                            while (await result.ReadAsync())
+                            {
+                                users.Add(new dtoJourney
+                                {
+                                    ValueThread = result.GetString(0),
+                                    DateCreate = result.GetDateTime(1),
+                                    Account = result.GetString(2),
+                                    CustomerID = result.GetString(3)
+
+
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                // Handle SQL exceptions (e.g., log the error)
+                Console.WriteLine($"SQL error: {sqlEx.Message}");
+                // Optionally, you could throw the exception or return an empty list
+                // throw; // Uncomment this if you want to propagate the exception
+            }
+            catch (Exception ex)
+            {
+                // Handle general exceptions (e.g., log the error)
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                // Optionally, you could throw the exception or return an empty list
+                // throw; // Uncomment this if you want to propagate the exception
+            }
+
+            return users;
+        }
+
+        [HttpGet("GetHistoryTicket")]
+        public async Task<List<dtoTicketHistory>> GetHistoryTicket(string CustomerId)
+        {
+            var users = new List<dtoTicketHistory>();
+
+            try
+            {
+                using (var connection = _context.Database.GetDbConnection())
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = connection.CreateCommand())
+
+
+                    {
+                        command.CommandText = "EXEC UIDESK_TrxTransactionTicket @TrxID,@TrxSearching,@TrxUserName,@TrxAction"; // Use parameter directly in command text
+                        command.CommandType = CommandType.Text;
+                        var typeParameter = new SqlParameter("@TrxID", CustomerId);
+                        var typeParameter2 = new SqlParameter("@TrxSearching", "");
+                        var typeParameter3 = new SqlParameter("@TrxUserName", "");
+                        var typeParameter4 = new SqlParameter("@TrxAction", "UIDESK331");
+
+                        command.Parameters.Add(typeParameter);
+                        command.Parameters.Add(typeParameter2);
+                        command.Parameters.Add(typeParameter3);
+                        command.Parameters.Add(typeParameter4);
+
+                        using (var result = await command.ExecuteReaderAsync())
+                        {
+                            while (await result.ReadAsync())
+                            {
+                                users.Add(new dtoTicketHistory
+                                {
+                                    TicketNumber = result.GetString(0),
+                                    Status = result.GetString(1),
+                                    DateCreate = result.GetDateTime(2),
+                                    TicketSourceName = result.GetString(3)
+
+
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                // Handle SQL exceptions (e.g., log the error)
+                Console.WriteLine($"SQL error: {sqlEx.Message}");
+                // Optionally, you could throw the exception or return an empty list
+                // throw; // Uncomment this if you want to propagate the exception
+            }
+            catch (Exception ex)
+            {
+                // Handle general exceptions (e.g., log the error)
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                // Optionally, you could throw the exception or return an empty list
+                // throw; // Uncomment this if you want to propagate the exception
+            }
+
+            return users;
+        }
+
 
     }
 }
+
+
+
+public partial class dtoJourney
+{
+    public string ValueThread { get; set; }
+    public DateTime DateCreate { get; set; }
+    public string Account { get; set; }
+    public string CustomerID { get; set; }
+}
+public partial class dtoTicketHistory
+{
+    public string TicketNumber { get; set; }
+    public string Status { get; set; }
+    public DateTime DateCreate { get; set; }
+    public string TicketSourceName { get; set; }
+}
+
+
 public partial class TicketDk
 {
 
@@ -938,7 +1908,20 @@ public partial class CustomerFetch
     public string Address { get; set; }
     public string UserName { get; set; }
 }
-
+public class ChatInsertDto
+{
+    public int ChatHeaderId { get; set; }
+    public DateTime? FirstResponseAgent { get; set; }
+    public DateTime? HandlingTime { get; set; }
+    public DateTime? DateCreatedAt { get; set; }
+    public DateTime? DateDistribute { get; set; }
+    public string PertanyaanPJ { get; set; }
+    public string JawabanAgent { get; set; }
+    public int? BubblePJ { get; set; }
+    public int? BubbleAgent { get; set; }
+    public int? TotalBubble { get; set; }
+    public DateTime? DateCreated { get; set; }
+}
 public partial class MCustomerDto
 {
 

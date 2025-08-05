@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using WEBAPI_Bravo.DinamicModel;
 using WEBAPI_Bravo.Model;
 using WebApiBravo.Models;
@@ -20,10 +22,12 @@ namespace WEBAPI_Bravo.Controllers
     public class SchedulerController : ControllerBase
     {
         private readonly BravoContext _context;
+        private readonly IConfiguration _configuration;
 
-        public SchedulerController(BravoContext context)
+        public SchedulerController(BravoContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // GET: api/MCustomers
@@ -246,6 +250,61 @@ namespace WEBAPI_Bravo.Controllers
 
 
         }
+
+        [HttpPost("schedule")]
+        public async Task<IActionResult> Schedule([FromBody] object jsonData)
+        {
+            if (jsonData == null)
+            {
+                return BadRequest("No data provided.");
+            }
+
+            // Serialize the incoming JSON data to a string
+            string jsonDataString = JsonSerializer.Serialize(jsonData);
+
+            // Retrieve the connection string from appsettings.json
+            string connectionString = _configuration.GetConnectionString("DefaultConnection2");
+
+            try
+            {
+                // Create a new SqlConnection with the connection string
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    // Open the connection
+                    await connection.OpenAsync();
+
+                    // Create a SQL command to execute the stored procedure
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "[dbo].[UIDESK_SCH_AUTOSCHEDULE]";
+
+                        // Add the JSON data as a parameter
+                        var jsonParam = new SqlParameter("@jsonData", SqlDbType.NVarChar)
+                        {
+                            Value = jsonDataString // Pass the serialized JSON string here
+                        };
+                        command.Parameters.Add(jsonParam);
+
+                        // Execute the stored procedure
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+
+                // Return a success message if everything goes well
+                return Ok("Schedule updated successfully");
+            }
+            catch (SqlException ex)
+            {
+                // Log the SQL exception details (optional)
+                return StatusCode(500, $"Database error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Log the general exception details (optional)
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
     }
     public class Params
     {
@@ -274,7 +333,17 @@ namespace WEBAPI_Bravo.Controllers
         public string UserName { get; set; }
         
     }
-    
+    public class ShiftSchedule
+    {
+        public string DateFixed { get; set; }
+        public string Interval { get; set; }
+        public int NeededAgents { get; set; }
+        public List<string> AssignedAgents { get; set; }
+        public string ChannelAgents { get; set; }
+        public string DayAgents { get; set; }
+    }
+
+
 }
 
 
